@@ -28,3 +28,5 @@ pip-log.txt
 
 #Virtualenv - for Irtefa
 .venv/*
+
+.DS_Store

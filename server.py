@@ -7,6 +7,7 @@ import tornado.ioloop
 import tornado.web
 from tornado.options import options, define
 from handlers.pages import *
+from handlers.login import *
 
 PORT = sys.argv[1]
 
@@ -27,7 +28,10 @@ class Application(tornado.web.Application):
         handlers = [
             tornado.web.URLSpec(r'/', IndexHandler),
             tornado.web.URLSpec(r'/about', AboutHandler),
-            tornado.web.URLSpec(r'/contact', ContactHandler)
+            tornado.web.URLSpec(r'/contact', ContactHandler),
+            tornado.web.URLSpec(r'/profile', ProfileHandler),
+
+            tornado.web.URLSpec(r'/login', FacebookLogin)
         ]
 
         current_dir = os.path.dirname(__file__)
@@ -35,8 +39,12 @@ class Application(tornado.web.Application):
         settings = dict(
             template_path=os.path.join(current_dir, 'templates'),
             static_path=os.path.join(current_dir, 'static'),
+            login_url='/login',
             debug=options.debug,
-            autoescape='xhtml_escape'
+            autoescape='xhtml_escape',
+            cookie_secret='947e5d1dc624bc99421bfc7e8ebad245',
+            facebook_api_key='256842614418725',
+            facebook_secret='c1b37bd36005a92cae532c8a0387ad6a'
         )
 
         super(Application, self).__init__(handlers, **settings)

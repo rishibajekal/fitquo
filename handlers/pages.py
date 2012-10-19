@@ -1,4 +1,4 @@
-from tornado.web import RequestHandler
+from tornado.web import RequestHandler, authenticated
 
 
 class IndexHandler(RequestHandler):
@@ -6,7 +6,7 @@ class IndexHandler(RequestHandler):
 
     def get(self):
         """Renders the index page"""
-        self.render('index.html')
+        self.render('out-index.html')
 
 
 class AboutHandler(RequestHandler):
@@ -23,3 +23,12 @@ class ContactHandler(RequestHandler):
     def get(self):
         """Renders the contact page"""
         self.render("contact.html")
+
+
+class ProfileHandler(RequestHandler):
+    """Handler to render profile page"""
+
+    @authenticated
+    def get(self):
+        """Renders the profile page"""
+        self.render("profile.html")
