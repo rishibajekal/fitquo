@@ -1,5 +1,6 @@
 #fitquo
 A project for CS 411 - Database Systems at University of Illinois at Urbana-Champaign.
+
 Created by Madina Abdrakhmanova, Rishi Bajekal, Mohd Irtefa, and Stephen Lee.
 
 __BEFORE EDITING OR ADDING CODE, PLEASE MAKE SURE YOUR TEXT EDITOR IS SETUP TO USE 4 ACTUAL SPACES (NOT TAB) ON AN INDENT.__
