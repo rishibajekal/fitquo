@@ -46,7 +46,7 @@ The feature branch I am working on is called `skeleton-rishi`.
     git push origin skeleton-rishi
     ```
 
-4. Create a pull request at https://github.com/rishibajekal/trainerhack
+4. Create a pull request at https://github.com/rishibajekal/fitquo
 5. Your code now needs to be reviewed by someone else on the team. Make any changes suggested by the reviewer and repeat steps 2 through 3
     - Comment on your pull request if new commits are made so anybody involved is notified of changes
 6. You (the developer), merges your user branch into `master`
