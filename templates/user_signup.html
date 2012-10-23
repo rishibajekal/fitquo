@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>fitquo</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="{{ static_url("css/main.css") }}">
+    <script src="{{ static_url("js/vendor/modernizr-2.6.1-respond-1.1.0.min.js") }}"></script>
+
+    <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <div class="navbar navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="/">fitquo</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="about">About</a></li>
+                        <li><a href="contact">Contact</a></li>
+                    </ul>
+                    <ul class="nav pull-right">
+                        <li><a href="profile">Profile</a></li>
+                        <li><a href="login">Login</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+
+        <div class="hero-unit">
+            <h1>Signup</h1>
+            <p>Please fill out the following information so we can customize the site based on your preferences.</p>
+            <div class="form-horizontal" id="user-signup">
+                <div class="control-group">
+                    <label class="control-label">Email:</label>
+                    <div class="controls">
+                        <textarea id="email" class="input-text" rows="1" type="text" name="" placeholder=""></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Age:</label>
+                    <div class="controls">
+                        <textarea id="age" class="input-text" rows="1" type="text" name="" placeholder=""></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Weight:</label>
+                    <div class="controls">
+                        <textarea id="weight" class="input-text" rows="1" type="text" name="" placeholder=""></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Height:</label>
+                    <div class="controls">
+                        <textarea id="height" class="input-text" rows="1" type="text" name="" placeholder=""></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <p><button id="signup-button" class="btn btn-primary btn-large button">Signup</button></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{{ static_url("js/vendor/jquery-1.8.2.min.js") }}"></script>
+    <script src="{{ static_url("js/vendor/bootstrap.min.js") }}"></script>
+    <script src="../static/js/signup.js"></script>
+
+</body>
+</html>
