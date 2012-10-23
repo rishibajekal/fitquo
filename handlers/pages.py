@@ -32,3 +32,12 @@ class ProfileHandler(RequestHandler):
     def get(self):
         """Renders the profile page"""
         self.render("profile.html")
+
+
+class SignupHandler(RequestHandler):
+    """Handler to render signup page"""
+
+    @authenticated
+    def get(self):
+        """Renders the signup page"""
+        self.render("user-signup.html")

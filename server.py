@@ -30,6 +30,7 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/about', AboutHandler),
             tornado.web.URLSpec(r'/contact', ContactHandler),
             tornado.web.URLSpec(r'/profile', ProfileHandler),
+            tornado.web.URLSpec(r'/signup', SignupHandler),
 
             tornado.web.URLSpec(r'/login', FacebookLogin)
         ]
@@ -48,7 +49,6 @@ class Application(tornado.web.Application):
         )
 
         super(Application, self).__init__(handlers, **settings)
-
 
         self.db = tornado.database.Connection(
             host=options.mysql_host, database=options.mysql_database,

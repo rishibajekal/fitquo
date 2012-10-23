@@ -19,7 +19,13 @@ class FacebookLogin(RequestHandler, FacebookMixin):
             raise tornado.web.HTTPError(500, "Facebook authentication failed. Please try again.")
         self.set_secure_cookie("user", tornado.escape.json_encode(user))
 
+        username = user['username']
+        pic_url = user['pic_square']
+        name = user['name']
+        uid = user['uid']
+
         # TODO: We should query database based on current user
         # if (user exists in db): render profile.html
-        # else: render user-signup.html
+        # else: put values in db and go to signup.html
+
         self.render('user-signup.html')

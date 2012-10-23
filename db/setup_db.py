@@ -67,13 +67,15 @@ db.execute(cmd)
 # Create User table
 cmd = """\
 CREATE TABLE `User` (\
-  `user_id` TINYINT NOT NULL AUTO_INCREMENT,\
+  `user_id` INT NOT NULL AUTO_INCREMENT,\
   `user_name` VARCHAR(100) NOT NULL DEFAULT 'NULL',\
+  `fb_id` INT NOT NULL,\
   `user_email` VARCHAR(50) NULL DEFAULT NULL,\
-  `age` TINYINT NULL DEFAULT NULL,\
-  `weight` TINYINT NULL DEFAULT NULL,\
-  `height` TINYINT NULL DEFAULT NULL,\
-  PRIMARY KEY (`user_id`)\
+  `age` INT NULL DEFAULT NULL,\
+  `weight` INT NULL DEFAULT NULL,\
+  `height` INT NULL DEFAULT NULL,\
+  PRIMARY KEY (`user_id`),\
+  UNIQUE (`fb_id`)\
 );\
 """
 db.execute(cmd)
@@ -81,12 +83,14 @@ db.execute(cmd)
 # Create Trainer table
 cmd = """\
 CREATE TABLE `Trainer` (\
-  `trainer_id` TINYINT NOT NULL AUTO_INCREMENT,\
+  `trainer_id` INT NOT NULL AUTO_INCREMENT,\
+  `fb_id` INT NOT NULL,\
   `trainer_name` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
   `trainer_email` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
   `gym` VARCHAR(100) NULL DEFAULT NULL,\
   `certification` VARCHAR(150) NULL DEFAULT NULL,\
-  PRIMARY KEY (`trainer_id`)\
+  PRIMARY KEY (`trainer_id`),\
+  UNIQUE (`fb_id`)\
 );\
 """
 db.execute(cmd)
@@ -94,8 +98,8 @@ db.execute(cmd)
 # Create Question table
 cmd = """\
 CREATE TABLE `Question` (\
-  `question_id` TINYINT NOT NULL AUTO_INCREMENT,\
-  `user_ID` TINYINT NOT NULL,\
+  `question_id` INT NOT NULL AUTO_INCREMENT,\
+  `user_ID` INT NOT NULL,\
   `posted_at` TIMESTAMP NOT NULL,\
   `content` VARCHAR(250) NOT NULL,\
   PRIMARY KEY (`question_id`),\
@@ -107,12 +111,12 @@ db.execute(cmd)
 # Create Answer table
 cmd = """\
 CREATE TABLE `Answer` (\
-  `answer_id` TINYINT NOT NULL AUTO_INCREMENT,\
-  `question_id` TINYINT NOT NULL,\
-  `trainer_id` TINYINT NOT NULL,\
+  `answer_id` INT NOT NULL AUTO_INCREMENT,\
+  `question_id` INT NOT NULL,\
+  `trainer_id` INT NOT NULL,\
   `posted_at` TIMESTAMP NOT NULL,\
   `content` VARCHAR(250) NOT NULL,\
-  `rating` TINYINT NULL DEFAULT NULL,\
+  `rating` INT NULL DEFAULT NULL,\
   PRIMARY KEY (`answer_id`),\
   FOREIGN KEY (question_id) REFERENCES `Question` (`question_id`),\
   FOREIGN KEY (trainer_id) REFERENCES `Trainer` (`trainer_id`)\
@@ -123,7 +127,7 @@ db.execute(cmd)
 # Create FitnessTopics table
 cmd = """\
 CREATE TABLE `FitnessTopics` (\
-  `topic_id` TINYINT NOT NULL AUTO_INCREMENT,\
+  `topic_id` INT NOT NULL AUTO_INCREMENT,\
   `name` VARCHAR(50) NOT NULL,\
   PRIMARY KEY (`topic_id`)\
 );\
@@ -133,9 +137,9 @@ db.execute(cmd)
 # Create Interests table
 cmd = """\
 CREATE TABLE `Interests` (\
-  `interest_id` TINYINT NOT NULL AUTO_INCREMENT,\
-  `user_id` TINYINT NOT NULL,\
-  `topic_id` TINYINT NOT NULL,\
+  `interest_id` INT NOT NULL AUTO_INCREMENT,\
+  `user_id` INT NOT NULL,\
+  `topic_id` INT NOT NULL,\
   PRIMARY KEY (`interest_id`),\
   FOREIGN KEY (user_id) REFERENCES `User` (`user_id`),\
   FOREIGN KEY (topic_id) REFERENCES `FitnessTopics` (`topic_id`)\
@@ -146,9 +150,9 @@ db.execute(cmd)
 # Create SpecializesIn table
 cmd = """\
 CREATE TABLE `SpecializesIn` (\
-  `specin_id` TINYINT NOT NULL AUTO_INCREMENT,\
-  `trainer_id` TINYINT NOT NULL,\
-  `topic_id` TINYINT NOT NULL,\
+  `specin_id` INT NOT NULL AUTO_INCREMENT,\
+  `trainer_id` INT NOT NULL,\
+  `topic_id` INT NOT NULL,\
   PRIMARY KEY (`specin_id`),\
   FOREIGN KEY (trainer_id) REFERENCES `Trainer` (`trainer_id`),\
   FOREIGN KEY (topic_id) REFERENCES `FitnessTopics` (`topic_id`)\
@@ -159,9 +163,9 @@ db.execute(cmd)
 # Create RelatesTo table
 cmd = """\
 CREATE TABLE `RelatesTo` (\
-  `about_id` TINYINT NOT NULL AUTO_INCREMENT,\
-  `question_id` TINYINT NOT NULL,\
-  `topic_id` TINYINT NOT NULL,\
+  `about_id` INT NOT NULL AUTO_INCREMENT,\
+  `question_id` INT NOT NULL,\
+  `topic_id` INT NOT NULL,\
   PRIMARY KEY (`about_id`),\
   FOREIGN KEY (question_id) REFERENCES `Question` (`question_id`),\
   FOREIGN KEY (topic_id) REFERENCES `FitnessTopics` (`topic_id`)\
