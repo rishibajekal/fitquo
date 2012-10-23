@@ -49,6 +49,7 @@ class Application(tornado.web.Application):
 
         super(Application, self).__init__(handlers, **settings)
 
+
         self.db = tornado.database.Connection(
             host=options.mysql_host, database=options.mysql_database,
             user=options.mysql_user, password=options.mysql_password)
