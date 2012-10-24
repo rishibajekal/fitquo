@@ -27,9 +27,10 @@ class SignupHandler(BaseHandler):
 
 class UserHandler(BaseHandler):
 
-    def get(self, fb_id):
+    def get(self):
         # FIXME
         # Get user with Facebook ID and write that JSON
-        self.write("{'name': 'Rishi Bajekal', 'email': 'rishi.bajekal@gmail.com', 'fb_id':"
-            + fb_id + "}")
+        #self.set_header("Content-Type", "application/json")
+        user = { 'name': "Rishi", 'email': "rishi.bajekal@gmail.com", 'age': "20", 'weight': "75", 'height': "5ft8"}
+        self.write(json.dumps(user))
         self.finish()

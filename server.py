@@ -41,7 +41,7 @@ class Application(tornado.web.Application):
 
             # API Handlers
             tornado.web.URLSpec(r'/api/signup', SignupHandler),
-            tornado.web.URLSpec(r'/api/user/([0-9]+)', UserHandler),
+            tornado.web.URLSpec(r'/api/user', UserHandler),
             tornado.web.URLSpec(r'/login', FacebookLogin)
         ]
 

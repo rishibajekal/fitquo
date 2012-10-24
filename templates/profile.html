@@ -45,16 +45,37 @@
         </div>
     </div>
     <div class="container">
+        <div class="row-fluid">
 
-        <div class="hero-unit">
-            <h1>Profile</h1>
-            <p>This is the profile page for fitquo.</p>
+            <div class="span2">
+                <div class="well well-large">
+                    <br />
+                    <h1>Sidebar</h1>
+                    <button class="btn btn-secondary">Edit Profile</button>
+                </div>
+            </div>
+
+            <div class="span10">
+                <div class="hero-unit">
+                    <h1 class="title">Profile</h1>         
+                    <p> Name: </p>
+                    <div id="name"></div>
+                    <p> Email: </p>
+                    <div id="email"></div> 
+                    <p> Age: </p>
+                    <div id="age"></div>
+                    <p> Weight: </p>
+                    <div id="weight"></div>
+                    <p> Height: </p>
+                    <div id="height"></div>
+                </div>
+            </div>
+
         </div>
-
     </div>
 
     <script src="{{ static_url("js/vendor/jquery-1.8.2.min.js") }}"></script>
     <script src="{{ static_url("js/vendor/bootstrap.min.js") }}"></script>
-
+    <script src="{{ static_url("js/profile.js") }}"></script>
 </body>
 </html>
