@@ -4,7 +4,10 @@ function signup(event){
   var user_height = $('#height').val();
   var user_weight = $('#weight').val();
 
-  var new_user = '{"email": "' + user_email + '", "age": "' + user_age + '", "weight": "' + user_weight + '","height": "' + user_height + '"}';
+  var new_user = '{"email": "' + user_email +
+                '", "age": "' + user_age +
+                '", "weight": "' + user_weight +
+                '","height": "' + user_height + '"}';
   $.ajax({
         url: '/api/signup',
         dataType: 'json',
