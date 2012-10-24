@@ -48,35 +48,60 @@
 
         <div class="hero-unit">
             <h1>Signup</h1>
-            <p>Please fill out the following information so we can customize the site based on your preferences.</p>
+            <p>We need some information so we can customize your experience based on your preferences.</p>
+            <p>Please fill out the form below.</p>
             <div class="form-horizontal" id="user-signup">
-                <div class="control-group">
+                <div class="control-group" id="email-group">
                     <label class="control-label">Email:</label>
                     <div class="controls">
-                        <textarea id="email" class="input-text" rows="1" type="text" name="" placeholder=""></textarea>
+                        <textarea id="email" class="input-large" rows="1" type="text" placeholder="name@example.com"></textarea>
+                        <span class="help-inline hidden" id="email-help">Please provide a valid email address.</span>
                     </div>
                 </div>
-                <div class="control-group">
+                <div class="control-group" id="age-group">
                     <label class="control-label">Age:</label>
                     <div class="controls">
-                        <textarea id="age" class="input-text" rows="1" type="text" name="" placeholder=""></textarea>
+                        <textarea id="age" class="input-medium" rows="1" type="text" placeholder="25"></textarea>
+                        <span class="help-inline hidden" id="age-help">Please provide a valid age.</span>
                     </div>
                 </div>
-                <div class="control-group">
-                    <label class="control-label">Weight:</label>
+                <div class="control-group" id="weight-group">
+                    <label class="control-label">Weight (in lbs):</label>
                     <div class="controls">
-                        <textarea id="weight" class="input-text" rows="1" type="text" name="" placeholder=""></textarea>
+                        <textarea id="weight" class="input-medium" rows="1" type="text" placeholder="180"></textarea>
+                        <span class="help-inline hidden" id="weight-help">Please provide a valid weight.</span>
                     </div>
                 </div>
                 <div class="control-group">
                     <label class="control-label">Height:</label>
                     <div class="controls">
-                        <textarea id="height" class="input-text" rows="1" type="text" name="" placeholder=""></textarea>
+                        <select id="height-feet" class="input-medium">
+                            <option>1 ft.</option>
+                            <option>2 ft.</option>
+                            <option>3 ft.</option>
+                            <option>4 ft.</option>
+                            <option>5 ft.</option>
+                            <option>6 ft.</option>
+                            <option>7 ft.</option>
+                        </select>
+                        <select id="height-inches" class="input-medium">
+                            <option>1 in.</option>
+                            <option>2 in.</option>
+                            <option>3 in.</option>
+                            <option>4 in.</option>
+                            <option>5 in.</option>
+                            <option>6 in.</option>
+                            <option>7 in.</option>
+                            <option>8 in.</option>
+                            <option>9 in.</option>
+                            <option>10 in.</option>
+                            <option>11 in.</option>
+                        </select>
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="controls">
-                        <p><button id="signup-button" class="btn btn-primary btn-large button">Signup</button></p>
+                        <p><button id="signup-button" class="btn btn-large btn-primary">Signup</button></p>
                     </div>
                 </div>
             </div>
@@ -86,7 +111,7 @@
 
     <script src="{{ static_url("js/vendor/jquery-1.8.2.min.js") }}"></script>
     <script src="{{ static_url("js/vendor/bootstrap.min.js") }}"></script>
-    <script src="../static/js/signup.js"></script>
+    <script src="{{ static_url("js/signup.js") }}"></script>
 
 </body>
 </html>
