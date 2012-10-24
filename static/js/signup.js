@@ -1,16 +1,18 @@
 $(document).ready(function() {
+
   validate_email("email");
   validate_number("age");
   validate_number("weight");
+
   $('#signup-button').click(function(event) {
     if (is_valid_form()) {
+      $('#invalid-form').addClass('hidden');
       signup(event);
     }
     else {
-      alert("Please ensure the form is filled out correctly.");
+      $('#invalid-form').removeClass('hidden');
     }
   });
-
 });
 
 function signup(event) {
@@ -51,10 +53,12 @@ function is_valid_form() {
 
 function validate_number(id) {
   $("#"+id).keyup(function(){
-    if(is_number($("#"+id).val())){
+    if($("#"+id).val() !== "" && is_number($("#"+id).val())){
       $("#"+id+"-group").removeClass("error");
+      $("#"+id+"-group").addClass("success");
       $("#"+id+"-help").addClass("hidden");
     } else{
+      $("#"+id+"-group").removeClass("success");
       $("#"+id+"-group").addClass("error");
       $("#"+id+"-help").removeClass("hidden");
     }
@@ -65,8 +69,10 @@ function validate_email(id) {
   $("#"+id).keyup(function(){
     if(is_email($("#"+id).val())){
       $("#"+id+"-group").removeClass("error");
+      $("#"+id+"-group").addClass("success");
       $("#"+id+"-help").addClass("hidden");
     } else{
+      $("#"+id+"-group").removeClass("success");
       $("#"+id+"-group").addClass("error");
       $("#"+id+"-help").removeClass("hidden");
     }
@@ -74,7 +80,7 @@ function validate_email(id) {
 }
 
 function is_number(number) {
-  var regex = /^\d{0,3}$/;
+  var regex = /^\d{2,3}$/;
   return regex.test(number);
 }
 
