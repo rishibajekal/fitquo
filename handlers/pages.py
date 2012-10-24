@@ -1,43 +1,39 @@
-from tornado.web import RequestHandler, authenticated
+from tornado.web import authenticated
+from handlers.base import BaseHandler
 
 
-class IndexHandler(RequestHandler):
+class IndexPageHandler(BaseHandler):
     """Handler to render index page"""
 
     def get(self):
-        """Renders the index page"""
-        self.render('out-index.html')
+        self.render('out_index.html')
 
 
-class AboutHandler(RequestHandler):
+class AboutPageHandler(BaseHandler):
     """Handler to render about page"""
 
     def get(self):
-        """Renders the about page"""
         self.render("about.html")
 
 
-class ContactHandler(RequestHandler):
+class ContactPageHandler(BaseHandler):
     """Handler to render contact page"""
 
     def get(self):
-        """Renders the contact page"""
         self.render("contact.html")
 
 
-class ProfileHandler(RequestHandler):
+class ProfilePageHandler(BaseHandler):
     """Handler to render profile page"""
 
     @authenticated
     def get(self):
-        """Renders the profile page"""
         self.render("profile.html")
 
 
-class SignupHandler(RequestHandler):
+class SignupPageHandler(BaseHandler):
     """Handler to render signup page"""
 
     @authenticated
     def get(self):
-        """Renders the signup page"""
-        self.render("user-signup.html")
+        self.render("user_signup.html")

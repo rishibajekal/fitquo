@@ -8,6 +8,7 @@ import tornado.web
 from tornado.options import options, define
 from handlers.pages import *
 from handlers.login import *
+from handlers.api import *
 
 PORT = sys.argv[1]
 
@@ -25,13 +26,22 @@ class Application(tornado.web.Application):
     def __init__(self):
         """Creates the application with specified settings"""
 
-        handlers = [
-            tornado.web.URLSpec(r'/', IndexHandler),
-            tornado.web.URLSpec(r'/about', AboutHandler),
-            tornado.web.URLSpec(r'/contact', ContactHandler),
-            tornado.web.URLSpec(r'/profile', ProfileHandler),
-            tornado.web.URLSpec(r'/signup', SignupHandler),
+        self.db = tornado.database.Connection(
+            host=options.mysql_host, database=options.mysql_database,
+            user=options.mysql_user, password=options.mysql_password)
 
+        handlers = [
+
+            # Page Handlers
+            tornado.web.URLSpec(r'/', IndexPageHandler),
+            tornado.web.URLSpec(r'/about', AboutPageHandler),
+            tornado.web.URLSpec(r'/contact', ContactPageHandler),
+            tornado.web.URLSpec(r'/profile', ProfilePageHandler),
+            tornado.web.URLSpec(r'/signup', SignupPageHandler),
+
+            # API Handlers
+            tornado.web.URLSpec(r'/api/signup', SignupHandler),
+            tornado.web.URLSpec(r'/api/user/([0-9]+)', UserHandler),
             tornado.web.URLSpec(r'/login', FacebookLogin)
         ]
 
@@ -49,10 +59,6 @@ class Application(tornado.web.Application):
         )
 
         super(Application, self).__init__(handlers, **settings)
-
-        self.db = tornado.database.Connection(
-            host=options.mysql_host, database=options.mysql_database,
-            user=options.mysql_user, password=options.mysql_password)
 
         logging.info('Server started on port {0}'.format(options.port))
 

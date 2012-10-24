@@ -17,7 +17,7 @@ class FacebookLogin(RequestHandler, FacebookMixin):
     def _on_auth(self, user):
         if not user:
             raise tornado.web.HTTPError(500, "Facebook authentication failed. Please try again.")
-        self.set_secure_cookie("user", tornado.escape.json_encode(user))
+        self.set_secure_cookie("fitquo", tornado.escape.json_encode(user))
 
         username = user['username']
         pic_url = user['pic_square']
@@ -28,4 +28,4 @@ class FacebookLogin(RequestHandler, FacebookMixin):
         # if (user exists in db): render profile.html
         # else: put values in db and go to signup.html
 
-        self.render('user-signup.html')
+        self.redirect('/signup')

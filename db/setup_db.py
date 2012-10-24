@@ -3,53 +3,40 @@
 from tornado.database import Connection
 import sys
 
-usage = """\
 
-ERROR:
-Please specify the stack in which you would like to run the database setup.
+def get_db_credentials():
+    prompt = """\
 
-    "dev": to run locally
-    "prod": to run on production
-"""
+Please enter the following information to connect to the database.
 
-dev_prompt = """\
+    """
+    print prompt
+    host = raw_input("'host': ")
+    db = raw_input("'database name': ")
+    user = raw_input("'username': ")
+    password = raw_input("'password': ")
+    return (host, db, user, password)
+
+
+def print_connection_prompt(host, database, user):
+    prompt = """\
 
 The script will now try to connect to...
-    database:   'fitquo'
-    on host:    'localhost:3306'
-    using user: 'root'
+    database:   '%s'
+    on host:    '%s'
+    using user: '%s'
 
-"""
+""" % (database, host, user)
+    print prompt
 
-prod_prompt = """\
-
-The script will now try to connect to:
-    database:   'fitquo'
-    on host:    'FIXME'
-    using user: 'fitquo'
-
-"""
-
-if len(sys.argv) != 2:
-    print usage
-    sys.exit(1)
-
-stack = sys.argv[1]
-
-if stack not in ('dev', 'prod'):
-    print usage
-    sys.exit(1)
-
-if stack == "dev":
-    print dev_prompt
-    password = raw_input("Please type the password for this user: ")
-    print password
-    db = Connection(host="localhost:3306", database="fitquo", user="root", password="")
+host, db, user, password = get_db_credentials()
+print_connection_prompt(db, host, user)
+sure = raw_input('Are you sure? (yes/no) ')
+if sure in ('yes', 'Yes', 'y', 'Y'):
+    db = Connection(host=host, database=db, user=user, password=password)
 else:
-    print prod_prompt
-    password = raw_input("Please type the password for this user: ")
-    db = Connection(host="FIXME", database="fitquo", user="fitquo", password=password)
-
+    print "Operation aborted."
+    sys.exit(1)
 
 # Drop existing tables
 cmd = """\
@@ -68,9 +55,10 @@ db.execute(cmd)
 cmd = """\
 CREATE TABLE `User` (\
   `user_id` INT NOT NULL AUTO_INCREMENT,\
-  `user_name` VARCHAR(100) NOT NULL DEFAULT 'NULL',\
   `fb_id` INT NOT NULL,\
+  `user_name` VARCHAR(100) NOT NULL DEFAULT 'NULL',\
   `user_email` VARCHAR(50) NULL DEFAULT NULL,\
+  `pic_url` VARCHAR(500) NULL DEFAULT NULL,\
   `age` INT NULL DEFAULT NULL,\
   `weight` INT NULL DEFAULT NULL,\
   `height` INT NULL DEFAULT NULL,\
@@ -85,8 +73,9 @@ cmd = """\
 CREATE TABLE `Trainer` (\
   `trainer_id` INT NOT NULL AUTO_INCREMENT,\
   `fb_id` INT NOT NULL,\
-  `trainer_name` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
+  `trainer_name` VARCHAR(100) NOT NULL DEFAULT 'NULL',\
   `trainer_email` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
+  `pic_url` VARCHAR(500) NULL DEFAULT NULL,\
   `gym` VARCHAR(100) NULL DEFAULT NULL,\
   `certification` VARCHAR(150) NULL DEFAULT NULL,\
   PRIMARY KEY (`trainer_id`),\
