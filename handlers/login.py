@@ -2,6 +2,7 @@ import tornado.auth
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
+import tornado.database
 from tornado.web import RequestHandler, asynchronous
 from tornado.auth import FacebookMixin
 
@@ -19,13 +20,20 @@ class FacebookLogin(RequestHandler, FacebookMixin):
             raise tornado.web.HTTPError(500, "Facebook authentication failed. Please try again.")
         self.set_secure_cookie("fitquo", tornado.escape.json_encode(user))
 
-        username = user['username']
         pic_url = user['pic_square']
         name = user['name']
-        uid = user['uid']
+        fb_id = user['uid']
 
-        # TODO: We should query database based on current user
-        # if (user exists in db): render profile.html
-        # else: put values in db and go to signup.html
+        check_user_cmd = """SELECT `user_name` FROM `User` WHERE `fb_id` = %d""" % fb_id
 
-        self.redirect('/signup')
+        result = self.application.db.query(check_user_cmd)
+        # If user does not exist, store in DB and go to signup
+        if len(result) == 0:
+            add_user = """INSERT INTO `User` (`fb_id`, `user_name`, `pic_url`) VALUES (%d, "%s", "%s")"""\
+                        % (fb_id, name, pic_url)
+            self.application.db.execute(add_user)
+            self.redirect('/signup')
+        # If user exists, go to their profile
+        else:
+            # self.redirect('/feed')
+            self.redirect('/profile')

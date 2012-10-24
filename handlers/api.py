@@ -11,9 +11,15 @@ class SignupHandler(BaseHandler):
         user = json.loads(new_user)
 
         user_email = user['email']
-        user_age = user['age']
-        user_weight = user['weight']
-        user_height = user['height']
+        user_age = int(user['age'])
+        user_weight = int(user['weight'])
+        user_height = int(user['height'])
+
+        curr_user = json.loads(self.get_current_user())
+
+        add_user_info = """UPDATE `User` SET `user_email`="%s", `age`=%d, `weight`=%d, `height`=%d WHERE `fb_id` = %d"""\
+                        % (user_email, user_age, user_weight, user_height, curr_user['uid'])
+        self.application.db.execute(add_user_info)
 
         self.write(json.dumps(user))
         self.finish()
