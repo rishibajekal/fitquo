@@ -14,9 +14,6 @@ $(document).ready(function(){
     });
   });
 
-});
-
-
 $('#search-bar').keypress(function(event){
    if (event.keyCode == 13)
    {
