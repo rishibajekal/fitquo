@@ -27,9 +27,12 @@ class SignupHandler(BaseHandler):
 class UserHandler(BaseHandler):
 
     def get(self):
-        # FIXME
         # Get user with email and write that JSON
-        #self.set_header("Content-Type", "application/json")
-        user = {'name': "Rishi", 'email': "rishi.bajekal@gmail.com", 'age': "20", 'weight': "75", 'height': "5ft8"}
+        curr_user = json.loads(self.get_current_user())
+
+        get_user = """SELECT * FROM `User` WHERE `user_email` = "%s" """\
+                        % (curr_user['email'])
+        user = self.application.db.query(get_user)[0]
+        self.set_header("Content-Type", "application/json")
         self.write(json.dumps(user))
         self.finish()

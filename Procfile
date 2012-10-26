@@ -1,1 +1,1 @@
-web: python server.py $PORT
+web: python server.py $PORT --mysql_host=engr-cpanel-mysql.engr.illinois.edu --mysql_database=fitquo_db --mysql_user=fitquo_user --mysql_password=passw0rd

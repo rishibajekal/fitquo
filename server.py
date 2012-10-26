@@ -54,8 +54,6 @@ class Application(tornado.web.Application):
             debug=options.debug,
             autoescape='xhtml_escape',
             cookie_secret='947e5d1dc624bc99421bfc7e8ebad245',
-            facebook_api_key='256842614418725',
-            facebook_secret='c1b37bd36005a92cae532c8a0387ad6a'
         )
 
         super(Application, self).__init__(handlers, **settings)
