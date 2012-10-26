@@ -7,7 +7,7 @@ $(document).ready(function(){
     $('#height').append(data['height']);
   });
 
-  $('#search-bar').keypress(function(event){
+$('#search-bar').keypress(function(event){
    if (event.keyCode == 13)
    {
        event.preventDefault();
@@ -31,3 +31,13 @@ function search(event){
     }
   });
 }
+
+  // REMOVE ME FOR REAL CODE (USE SOME FOR LOGOUT)
+$('#delete-profile').click(function(event) {
+    $.get('/api/delete', function(data){
+      window.location.replace("/");
+    });
+  });
+
+});
+

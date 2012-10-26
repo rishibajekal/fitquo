@@ -8,6 +8,7 @@ from tornado.auth import GoogleMixin
 
 
 class GoogleLogin(RequestHandler, GoogleMixin):
+
     @asynchronous
     def get(self):
         if self.get_argument("openid.mode", None):

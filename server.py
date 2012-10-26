@@ -40,6 +40,11 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/signup', SignupPageHandler),
 
             # API Handlers
+
+            # DELETE ME (CHANGE TO LOGOUT)
+            tornado.web.URLSpec(r'/api/delete', DeleteUserHandler),
+
+            tornado.web.URLSpec(r'/api/search', UserSearchHandler),
             tornado.web.URLSpec(r'/api/signup', SignupHandler),
             tornado.web.URLSpec(r'/api/user', UserHandler),
             tornado.web.URLSpec(r'/login', GoogleLogin)
