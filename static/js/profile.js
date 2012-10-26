@@ -9,7 +9,7 @@ $(document).ready(function(){
 
   // REMOVE ME FOR REAL CODE (USE SOME FOR LOGOUT)
   $('#delete-profile').click(function(event) {
-    $.get('/api/delete', function(data){
+    $.getJSON('/api/delete', function(data){
       window.location.replace("/");
     });
   });
