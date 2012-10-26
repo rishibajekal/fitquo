@@ -23,6 +23,14 @@ class ContactPageHandler(BaseHandler):
         self.render("contact.html")
 
 
+# DELETE ME
+class QueryResultsHandler(BaseHandler):
+
+    @authenticated
+    def get(self):
+        self.render("query_results.html")
+
+
 class ProfilePageHandler(BaseHandler):
     """Handler to render profile page"""
 

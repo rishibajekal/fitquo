@@ -25,16 +25,17 @@ $('#search-bar').keypress(function(event){
 
 
 function search(event){
-    var query = $('#search-bar').val();
-    query = '{"query": "' + query + '"}';
-    $('#search-bar').replaceWith('<input id="search-bar" class="input-xxlarge" type="text" placeholder="search"></input>');
-    $.ajax({
+  var query = $('#search-bar').val();
+  query = '{"query": "' + query + '"}';
+  $('#search-bar').replaceWith('<input id="search-bar" class="input-xxlarge" type="text" placeholder="search"></input>');
+  $.ajax({
     url: '/api/search',
     dataType: 'json',
-    type: 'GET',
+    type: 'POST',
     data: query,
     success: function(data) {
-      window.location.replace("query_results.html");
+      //window.location.replace("/query_results");
+      $('#search-results').append('<li>' + 'username: ' + data['user_name'] + ', email: ' + data['user_email'] + '</li>');
     }
   });
 }

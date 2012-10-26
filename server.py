@@ -43,6 +43,7 @@ class Application(tornado.web.Application):
 
             # DELETE ME (CHANGE TO LOGOUT)
             tornado.web.URLSpec(r'/api/delete', DeleteUserHandler),
+            tornado.web.URLSpec(r'/query_results', QueryResultsHandler),
 
             tornado.web.URLSpec(r'/api/search', UserSearchHandler),
             tornado.web.URLSpec(r'/api/signup', SignupHandler),
