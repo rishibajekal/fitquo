@@ -26,7 +26,7 @@ $('#search-bar').keypress(function(event){
 
 function search(event){
     var query = $('#search-bar').val();
-    query = '{"query": "' + query + '"}'
+    query = '{"query": "' + query + '"}';
     $('#search-bar').replaceWith('<input id="search-bar" class="input-xxlarge" type="text" placeholder="search"></input>');
     $.ajax({
     url: '/api/search',
