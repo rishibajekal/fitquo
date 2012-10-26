@@ -3,41 +3,9 @@ $(document).ready(function(){
     $('#email').append(data['user_email']);
     $('#name').append(data['user_name']);
     $('#age').append(data['age']);
-    $('#weight').append(data['weight']);
-    $('#height').append(data['height']);
+    $('#weight').append(data['weight'] + " lbs");
+    var feet = Math.floor(data['height'] / 12);
+    var inches = data['height'] % 12;
+    $('#height').append(feet + " feet, " + inches + " inches");
   });
-
-    // REMOVE ME FOR REAL CODE (USE SOME FOR LOGOUT)
-  $('#delete-profile').click(function(event) {
-    $.getJSON('/api/delete', function(data){
-      window.location.replace("/");
-    });
-  });
-
-$('#search-bar').keypress(function(event){
-   if (event.keyCode == 13)
-   {
-       event.preventDefault();
-       search(event);
-   }
-   });
 });
-
-
-function search(event){
-  var query = $('#search-bar').val();
-  query = '{"query": "' + query + '"}';
-  $('#search-bar').replaceWith('<input id="search-bar" class="input-xxlarge" type="text" placeholder="search"></input>');
-  $.ajax({
-    url: '/api/search',
-    dataType: 'json',
-    type: 'POST',
-    data: query,
-    success: function(data) {
-      //window.location.replace("/query_results");
-      $('#search-results').append('<li>' + 'username: ' + data['user_name'] + ', email: ' + data['user_email'] + '</li>');
-    }
-  });
-}
-
-

@@ -6,7 +6,7 @@ class IndexPageHandler(BaseHandler):
     """Handler to render index page"""
 
     def get(self):
-        self.render('out_index.html')
+        self.render('index.html')
 
 
 class AboutPageHandler(BaseHandler):
@@ -21,14 +21,6 @@ class ContactPageHandler(BaseHandler):
 
     def get(self):
         self.render("contact.html")
-
-
-# DELETE ME
-class QueryResultsHandler(BaseHandler):
-
-    @authenticated
-    def get(self):
-        self.render("query_results.html")
 
 
 class ProfilePageHandler(BaseHandler):
