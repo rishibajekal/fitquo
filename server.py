@@ -42,7 +42,7 @@ class Application(tornado.web.Application):
             # API Handlers
             tornado.web.URLSpec(r'/api/signup', SignupHandler),
             tornado.web.URLSpec(r'/api/user', UserHandler),
-            tornado.web.URLSpec(r'/login', FacebookLogin)
+            tornado.web.URLSpec(r'/login', GoogleLogin)
         ]
 
         current_dir = os.path.dirname(__file__)

@@ -55,15 +55,12 @@ db.execute(cmd)
 cmd = """\
 CREATE TABLE `User` (\
   `user_id` INT NOT NULL AUTO_INCREMENT,\
-  `fb_id` INT NOT NULL,\
   `user_name` VARCHAR(100) NOT NULL DEFAULT 'NULL',\
   `user_email` VARCHAR(50) NULL DEFAULT NULL,\
-  `pic_url` VARCHAR(500) NULL DEFAULT NULL,\
   `age` INT NULL DEFAULT NULL,\
   `weight` INT NULL DEFAULT NULL,\
   `height` INT NULL DEFAULT NULL,\
-  PRIMARY KEY (`user_id`),\
-  UNIQUE (`fb_id`)\
+  PRIMARY KEY (`user_id`)
 );\
 """
 db.execute(cmd)
@@ -72,14 +69,11 @@ db.execute(cmd)
 cmd = """\
 CREATE TABLE `Trainer` (\
   `trainer_id` INT NOT NULL AUTO_INCREMENT,\
-  `fb_id` INT NOT NULL,\
   `trainer_name` VARCHAR(100) NOT NULL DEFAULT 'NULL',\
   `trainer_email` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
-  `pic_url` VARCHAR(500) NULL DEFAULT NULL,\
   `gym` VARCHAR(100) NULL DEFAULT NULL,\
   `certification` VARCHAR(150) NULL DEFAULT NULL,\
-  PRIMARY KEY (`trainer_id`),\
-  UNIQUE (`fb_id`)\
+  PRIMARY KEY (`trainer_id`)
 );\
 """
 db.execute(cmd)
