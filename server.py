@@ -14,10 +14,10 @@ PORT = sys.argv[1]
 
 define("port", default=PORT, help="run on the given port", type=int)
 define("debug", default=False, help="run tornado in debug mode", type=bool)
-define("mysql_host", default="localhost:3306", help="host and port mysql is running on")
-define("mysql_database", default="fitquo", help="name of the mysql database")
-define("mysql_user", default="root", help="name of the mysql user")
-define("mysql_password", default="", help="password of the mysql user")
+define("mysql_host", default="engr-cpanel-mysql.engr.illinois.edu", help="host and port mysql is running on")
+define("mysql_database", default="fitquo_db", help="name of the mysql database")
+define("mysql_user", default="fitquo_user", help="name of the mysql user")
+define("mysql_password", default="passw0rd", help="password of the mysql user")
 
 
 class Application(tornado.web.Application):
