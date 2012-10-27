@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block navbar %}
-    <ul class="nav pull-right">
-        <li class="active"><a href="/">Home</a></li>
-        <li><a href="profile">Profile</a></li>
-        <li><a href="about">About</a></li>
-        <li><a href="contact">Contact</a></li>
-    </ul>
+    {% if current_user %}
+        {% include "nav_logged_in.html" %}
+    {% else %}
+        {% include "nav_logged_out.html" %}
+    {% end %}
 {% end %}
 
 {% block content %}

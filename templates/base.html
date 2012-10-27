@@ -13,7 +13,7 @@
 
     <link rel="stylesheet" href="{{ static_url("css/main.css") }}">
     <script src="{{ static_url("js/vendor/modernizr-2.6.1-respond-1.1.0.min.js") }}"></script>
-
+    
     <!--[if IE]>
         <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -21,12 +21,18 @@
 </head>
 
 <body>
+
     <div class="navbar navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
                 <a class="brand" href="/">fitquo</a>
                 <div class="nav-collapse collapse">
-
+                    
                     {% block navbar %}{% end %}
 
                 </div><!--/.nav-collapse -->

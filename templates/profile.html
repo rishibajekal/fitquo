@@ -1,12 +1,7 @@
 {% extends "base.html" %}
 
 {% block navbar %}
-    <ul class="nav pull-right">
-        <li><a href="/">Home</a></li>
-        <li class="active"><a href="profile">Profile</a></li>
-        <li><a href="about">About</a></li>
-        <li><a href="contact">Contact</a></li>
-    </ul>
+    {% include "nav_logged_in.html" %}
 {% end %}
 
 {% block content %}
@@ -17,6 +12,7 @@
                     <br />
                     <h2>Profile</h2>
                     <ul class="nav nav-tabs nav-stacked">
+                        <li class="active"><a href="#"><strong>Personal Info</strong></a></li>
                         <li><a href="#"><strong>My Interests</strong></a></li>
                         <li><a href="#"><strong>My Questions</strong></a></li>
                         <li><a href="#"><strong>Edit Profile</strong></a></li>
@@ -28,27 +24,15 @@
 
                 <div class="hero-unit">
                     <h2>Personal Information</h2>         
-                    <h4>Name: </h4><p id ="name"></p>
-                    <h4>Email: </h4><p id="email"></p>
-                    <h4>Age: </h4><p id="age"></p>
-                    <h4>Weight: </h4><p id="weight"></p>
-                    <h4>Height: </h4><p id="height"></p>
+                    <h4>Name: <large class="lead" id ="name"></large></h4>
+                    <h4>Email: <large class="lead" id="email"></large></h4>
+                    <h4>Age: <large class="lead" id="age"></large></h4>
+                    <h4>Weight: <large class="lead" id="weight"></large></h4>
+                    <h4>Height: <large class="lead" id="height"></large></h4>
                 </div>
-          
+
             </div>
 
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="well well-large">
-                    <h2>Activity</h2>
-                    <p>My recent activity...</p>
-                </div>
-          
-            </div>
         </div>
     </div>
 {% end %}
