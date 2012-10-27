@@ -37,3 +37,11 @@ class GoogleLogin(RequestHandler, GoogleMixin):
         else:
             # self.redirect('/feed')
             self.redirect('/profile')
+
+
+class LogoutHandler(RequestHandler):
+
+    @asynchronous
+    def get(self):
+        self.clear_cookie("fitquo")
+        self.redirect('/')

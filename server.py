@@ -7,7 +7,7 @@ import tornado.ioloop
 import tornado.web
 from tornado.options import options, define
 from handlers.pages import *
-from handlers.login import *
+from handlers.auth import *
 from handlers.api import *
 
 PORT = sys.argv[1]
@@ -42,7 +42,8 @@ class Application(tornado.web.Application):
             # API Handlers
             tornado.web.URLSpec(r'/api/signup', SignupHandler),
             tornado.web.URLSpec(r'/api/user', UserHandler),
-            tornado.web.URLSpec(r'/login', GoogleLogin)
+            tornado.web.URLSpec(r'/login', GoogleLogin),
+            tornado.web.URLSpec(r'/logout', LogoutHandler)
         ]
 
         current_dir = os.path.dirname(__file__)
