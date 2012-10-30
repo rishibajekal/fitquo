@@ -16,6 +16,7 @@
             <p>We need some information so we can customize your experience based on your preferences.</p>
             <p>Please fill out the form below.</p>
             <div class="form-horizontal" id="user-signup">
+                {% module xsrf_form_html() %}
                 <div class="control-group" id="age-group">
                     <label class="control-label">Age:</label>
                     <div class="controls">

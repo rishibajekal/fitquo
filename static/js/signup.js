@@ -15,21 +15,28 @@ $(document).ready(function() {
 });
 
 function signup(event) {
-  var user_age = parseInt($('#age').val(), 10);
-  var user_weight = parseInt($('#weight').val(), 10);
-  var user_height = (12 * parseInt($('#height-feet').val(), 10)) + parseInt($('#height-inches').val(), 10);
+  var user_age = $('#age').val();
+  var user_weight = $('#weight').val();
+  var user_height_feet = $('#height-feet').val();
+  var user_height_inches = $('#height-inches').val();
 
-
-  var new_user = '{"age": ' + user_age +
-                ', "weight": ' + user_weight +
-                ',"height": ' + user_height + '}';
+  var post_data = {
+    "user": {
+      "age": parseInt(user_age, 10),
+      "weight": parseInt(user_weight, 10),
+      "height": 12 * parseInt(user_height_feet, 10) + parseInt(user_height_inches, 10)
+    },
+    "_xsrf": getCookie("_xsrf")
+  };
 
   $.ajax({
     url: '/api/signup',
-    dataType: 'json',
     type: 'POST',
-    data: new_user,
+    contentType: 'application/json',
+    dataType: 'json',
+    data: JSON.stringify(post_data),
     success: function(data) {
+      console.log(data);
       window.location.replace("/profile");
     }
   });
@@ -62,4 +69,9 @@ function validate_number(id) {
 function is_number(number) {
   var regex = /^\d{2,3}$/;
   return regex.test(number);
+}
+
+function getCookie(name) {
+    var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+    return r ? r[1] : undefined;
 }

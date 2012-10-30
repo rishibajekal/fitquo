@@ -22,18 +22,23 @@ class SignupHandler(BaseHandler):
 
     @asynchronous
     def post(self):
-        new_user = self.request.body
-        user = json.loads(new_user)
+        body = json.loads(self.request.body)
+        user = body["user"]
 
-        user_age = int(user['age'])
-        user_weight = int(user['weight'])
-        user_height = int(user['height'])
+        if self.add_user(user):
+            self.write({"success": "true"})
+        else:
+            self.write({"success": "false"})
+        self.finish()
 
+    def add_user(self, user):
         curr_user = json.loads(self.get_current_user())
 
         add_user_info = """UPDATE `User` SET `age`=%d, `weight`=%d, `height`=%d WHERE `user_email` = "%s" """\
-                        % (user_age, user_weight, user_height, curr_user['email'])
-        self.application.db.execute(add_user_info)
+                        % (user["age"], user["weight"], user["height"], curr_user["email"])
+        result = self.application.db.execute(add_user_info)
 
-        self.write(json.dumps(user))
-        self.finish()
+        if result is not None:
+            return True
+        else:
+            return False

@@ -59,6 +59,7 @@ class Application(tornado.web.Application):
             debug=options.debug,
             autoescape='xhtml_escape',
             cookie_secret='947e5d1dc624bc99421bfc7e8ebad245',
+            xsrf_cookies=True
         )
 
         super(Application, self).__init__(handlers, **settings)
