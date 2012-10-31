@@ -5,6 +5,7 @@ $(document).ready(function() {
 
   $('#signup-button').click(function(event) {
     if (is_valid_form()) {
+      $('#database-error').addClass('hidden');
       $('#invalid-form').addClass('hidden');
       signup(event);
     }
@@ -36,8 +37,12 @@ function signup(event) {
     dataType: 'json',
     data: JSON.stringify(post_data),
     success: function(data) {
-      console.log(data);
-      window.location.replace("/profile");
+      if (data.success === "true") {
+        window.location.replace("/profile");
+      }
+      else {
+        $('#database-error').removeClass('hidden');
+      }
     }
   });
 }

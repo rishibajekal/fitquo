@@ -38,7 +38,4 @@ class SignupHandler(BaseHandler):
                         % (user["age"], user["weight"], user["height"], curr_user["email"])
         result = self.application.db.execute(add_user_info)
 
-        if result is not None:
-            return True
-        else:
-            return False
+        return True if result is not None else False
