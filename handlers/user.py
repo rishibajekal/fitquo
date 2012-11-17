@@ -3,7 +3,7 @@ from handlers.base import BaseHandler
 import simplejson as json
 
 
-class UserHandler(BaseHandler):
+class UserInfoHandler(BaseHandler):
 
     @asynchronous
     def get(self):
@@ -18,12 +18,18 @@ class UserHandler(BaseHandler):
         self.finish()
 
 
-class SignupHandler(BaseHandler):
+class UserSignupHandler(BaseHandler):
 
     @asynchronous
     def post(self):
+        curr_user = json.loads(self.get_current_user())
+        name = curr_user["name"]
+        email = curr_user["email"]
+
         body = json.loads(self.request.body)
         user = body["user"]
+        user["name"] = name
+        user["email"] = email
 
         if self.add_user(user):
             self.write({"success": "true"})
@@ -32,10 +38,8 @@ class SignupHandler(BaseHandler):
         self.finish()
 
     def add_user(self, user):
-        curr_user = json.loads(self.get_current_user())
-
-        add_user_info = """UPDATE `User` SET `age`=%d, `weight`=%d, `height`=%d WHERE `user_email` = "%s" """\
-                        % (user["age"], user["weight"], user["height"], curr_user["email"])
+        add_user_info = """INSERT INTO `User` (`user_name`, `user_email`, `age`, `weight`, `height`) VALUES ("%s", "%s", %d, %d, %d)"""\
+                        % (user["name"], user["email"], user["age"], user["weight"], user["height"])
         result = self.application.db.execute(add_user_info)
 
         return True if result is not None else False

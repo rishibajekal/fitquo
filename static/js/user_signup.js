@@ -31,7 +31,7 @@ function signup(event) {
   };
 
   $.ajax({
-    url: '/api/signup',
+    url: '/api/user_signup',
     type: 'POST',
     contentType: 'application/json',
     dataType: 'json',

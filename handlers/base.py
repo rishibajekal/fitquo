@@ -10,6 +10,10 @@ class BaseHandler(RequestHandler):
         user = self.get_secure_cookie("fitquo")
         return user
 
+    def get_client_type(self):
+        client = self.get_secure_cookie("client_type")
+        return client
+
     def check_xsrf_cookie(self):
         token = (self.get_argument("_xsrf", None) or
                 (json.loads(self.request.body)["_xsrf"]))

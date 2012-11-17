@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul class="nav pull-right">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+{% end %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="hero-unit">
+            <h1>Signup</h1>
+            <p>Would you like to signup as a User or Trainer?</p>
+            <p>
+                <button class="btn btn-large"><a href="/user_signup">Signup as User</a></button>
+                <button class="btn btn-large"><a href="/trainer_signup">Signup as Trainer</a></button>
+            </p>
+        </div>
+
+    </div>
+{% end %}
+
+{% block scripts %}
+{% end %}

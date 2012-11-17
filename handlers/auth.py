@@ -21,22 +21,21 @@ class GoogleLogin(RequestHandler, GoogleMixin):
             raise tornado.web.HTTPError(500, "Google authentication failed. Please try again.")
         self.set_secure_cookie("fitquo", tornado.escape.json_encode(user))
 
-        name = user['name']
         email = user['email']
 
         check_user_cmd = """SELECT `user_name` FROM `User` WHERE `user_email` = "%s" """ % email
+        check_trainer_cmd = """SELECT `trainer_name` FROM `Trainer` WHERE `trainer_email` = "%s" """ % email
 
-        result = self.application.db.query(check_user_cmd)
-        # If user does not exist, store in DB and go to signup
-        if len(result) == 0:
-            add_user = """INSERT INTO `User` (`user_name`, `user_email`) VALUES ("%s", "%s")"""\
-                        % (name, email)
-            self.application.db.execute(add_user)
-            self.redirect('/signup')
-        # If user exists, go to their profile
-        else:
+        user_result = self.application.db.query(check_user_cmd)
+        trainer_result = self.application.db.query(check_trainer_cmd)
+
+        # If user/trainer exists, go to the feed
+        if len(user_result) != 0 or len(trainer_result) != 0:
             # self.redirect('/feed')
             self.redirect('/profile')
+        # If user does not exist, store in DB and go to pre signup
+        else:
+            self.redirect('/pre_signup')
 
 
 class LogoutHandler(RequestHandler):

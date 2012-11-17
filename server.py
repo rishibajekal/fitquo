@@ -8,7 +8,8 @@ import tornado.web
 from tornado.options import options, define
 from handlers.pages import *
 from handlers.auth import *
-from handlers.api import *
+from handlers.user import *
+from handlers.trainer import *
 
 PORT = sys.argv[1]
 HOST = sys.argv[2]
@@ -41,11 +42,15 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/about', AboutPageHandler),
             tornado.web.URLSpec(r'/contact', ContactPageHandler),
             tornado.web.URLSpec(r'/profile', ProfilePageHandler),
-            tornado.web.URLSpec(r'/signup', SignupPageHandler),
+            tornado.web.URLSpec(r'/pre_signup', PreSignupPageHandler),
+            tornado.web.URLSpec(r'/user_signup', UserSignupPageHandler),
+            tornado.web.URLSpec(r'/trainer_signup', TrainerSignupPageHandler),
 
             # API Handlers
-            tornado.web.URLSpec(r'/api/signup', SignupHandler),
-            tornado.web.URLSpec(r'/api/user', UserHandler),
+            tornado.web.URLSpec(r'/api/user_signup', UserSignupHandler),
+            tornado.web.URLSpec(r'/api/trainer_signup', TrainerSignupHandler),
+            tornado.web.URLSpec(r'/api/user', UserInfoHandler),
+            tornado.web.URLSpec(r'/api/trainer', TrainerInfoHandler),
             tornado.web.URLSpec(r'/login', GoogleLogin),
             tornado.web.URLSpec(r'/logout', LogoutHandler)
         ]

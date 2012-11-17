@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul class="nav pull-right">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+{% end %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="hero-unit">
+            <h1>Signup</h1>
+            <p>We need some information so we can customize your experience based on your preferences.</p>
+            <p>Please fill out the form below.</p>
+            <div class="form-horizontal" id="user-signup">
+                {% module xsrf_form_html() %}
+                <div class="control-group" id="gym-group">
+                    <label class="control-label">Gym:</label>
+                    <div class="controls">
+                        <textarea id="gym" class="input-medium" rows="1" type="text" placeholder="Joe's Gym"></textarea>
+                        <span class="help-inline hidden" id="gym-help">Please provide a valid gym name.</span>
+                    </div>
+                </div>
+                <div class="control-group" id="cert-group">
+                    <label class="control-label">Certification:</label>
+                    <div class="controls">
+                        <textarea id="cert" class="input-medium" rows="1" type="text" placeholder="NGA Personal Trainer"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button id="signup-button" class="btn btn-large btn-primary">Signup</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-error hidden" id="invalid-form">
+                    <strong>Warning!</strong> Please provide valid input for all information.
+                </div>
+
+                <div class="alert alert-error hidden" id="database-error">
+                    <strong>Error!</strong> There seems to be a problem with the application. Please try to sign up again soon.
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% end %}
+
+{% block scripts %}
+    <script src="{{ static_url('js/trainer_signup.js') }}"></script>
+{% end %}
