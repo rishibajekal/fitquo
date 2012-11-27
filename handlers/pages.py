@@ -64,3 +64,11 @@ class TrainerSignupPageHandler(BaseHandler):
         client["type"] = "trainer"
         self.set_secure_cookie("client_type", json.dumps(client))
         self.render("trainer_signup.html")
+
+
+class QuestionPageHandler(BaseHandler):
+    """Handler to render to ask a question"""
+
+    @authenticated
+    def get(self):
+        self.render("ask.html")

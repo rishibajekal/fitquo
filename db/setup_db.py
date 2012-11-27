@@ -82,11 +82,11 @@ db.execute(cmd)
 cmd = """\
 CREATE TABLE `Question` (\
   `question_id` INT NOT NULL AUTO_INCREMENT,\
-  `user_ID` INT NOT NULL,\
-  `posted_at` TIMESTAMP NOT NULL,\
+  `user_id` INT NOT NULL,\
+  `posted_at` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
   `content` VARCHAR(250) NOT NULL,\
   PRIMARY KEY (`question_id`),\
-  FOREIGN KEY (user_ID) REFERENCES `User` (`user_id`)\
+  FOREIGN KEY (user_id) REFERENCES `User` (`user_id`)\
 );\
 """
 db.execute(cmd)
@@ -97,7 +97,7 @@ CREATE TABLE `Answer` (\
   `answer_id` INT NOT NULL AUTO_INCREMENT,\
   `question_id` INT NOT NULL,\
   `trainer_id` INT NOT NULL,\
-  `posted_at` TIMESTAMP NOT NULL,\
+  `posted_at` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
   `content` VARCHAR(250) NOT NULL,\
   `rating` INT NULL DEFAULT NULL,\
   PRIMARY KEY (`answer_id`),\

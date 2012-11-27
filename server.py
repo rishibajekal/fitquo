@@ -10,6 +10,7 @@ from handlers.pages import *
 from handlers.auth import *
 from handlers.user import *
 from handlers.trainer import *
+from handlers.question import *
 
 PORT = sys.argv[1]
 HOST = sys.argv[2]
@@ -45,12 +46,16 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/pre_signup', PreSignupPageHandler),
             tornado.web.URLSpec(r'/user_signup', UserSignupPageHandler),
             tornado.web.URLSpec(r'/trainer_signup', TrainerSignupPageHandler),
+            tornado.web.URLSpec(r'/ask', QuestionPageHandler),
 
             # API Handlers
             tornado.web.URLSpec(r'/api/user_signup', UserSignupHandler),
             tornado.web.URLSpec(r'/api/trainer_signup', TrainerSignupHandler),
             tornado.web.URLSpec(r'/api/user', UserInfoHandler),
             tornado.web.URLSpec(r'/api/trainer', TrainerInfoHandler),
+
+            tornado.web.URLSpec(r'/api/ask', QuestionHandler),
+
             tornado.web.URLSpec(r'/login', GoogleLogin),
             tornado.web.URLSpec(r'/logout', LogoutHandler)
         ]

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ul class="nav pull-right">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+    </ul>
+{% end %}
+
+{% block content %}
+    <div class="container">
+        <div class="hero-unit">
+            <h1>Ask a question</h1>
+            <p>Please ask your question using the form below:</p>
+            <div class="form-horizontal" id="user-signup">
+                <div class="control-group" id="age-group">
+                    <div class="controls">
+                        <textarea id="question" class="input-large" rows="5" type="text" placeholder="Type your question here"></textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button id="question-button" class="btn btn-large btn-primary">Ask question</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-error hidden" id="invalid-form">
+                    <strong>Warning!</strong> Please do not leave the question field blank or exceed 250 characters.
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% end %}
+
+{% block scripts %}
+    <script src="{{ static_url('js/ask.js') }}"></script>
+{% end %}
