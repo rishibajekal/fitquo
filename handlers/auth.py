@@ -5,6 +5,7 @@ import tornado.web
 import tornado.database
 from tornado.web import RequestHandler, asynchronous
 from tornado.auth import GoogleMixin
+import simplejson as json
 
 
 class GoogleLogin(RequestHandler, GoogleMixin):
@@ -31,7 +32,14 @@ class GoogleLogin(RequestHandler, GoogleMixin):
 
         # If user/trainer exists, go to the feed
         if len(user_result) != 0 or len(trainer_result) != 0:
+            client = dict()
             # self.redirect('/feed')
+            if(user_result) != 0:
+                client["type"] = "user"
+                self.set_secure_cookie("client_type", json.dumps(client))
+            else:
+                client["type"] = "trainer"
+                self.set_secure_cookie("client_type", json.dumps(client))
             self.redirect('/profile')
         # If user does not exist, store in DB and go to pre signup
         else:
