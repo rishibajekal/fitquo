@@ -67,8 +67,16 @@ class TrainerSignupPageHandler(BaseHandler):
 
 
 class QuestionPageHandler(BaseHandler):
-    """Handler to render to ask a question"""
+    """Handler to render page to ask a question"""
 
     @authenticated
     def get(self):
         self.render("ask.html")
+
+
+class FeedPageHandler(BaseHandler):
+    """Handler to render feed page"""
+
+    @authenticated
+    def get(self):
+        self.render("feed.html")

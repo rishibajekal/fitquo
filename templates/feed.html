@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+    {% include "nav_logged_in.html" %}
+{% end %}
+
+{% block content %}
+    <div class="container">
+        <div class="hero-unit">
+            <h1>Feed</h1>
+            <div id="questions"></div>
+        </div>
+    </div>
+{% end %}
+
+{% block scripts %}
+    <script src="{{ static_url('js/feed.js') }}"></script>
+{% end %}

@@ -51,7 +51,6 @@ cmd = """\
 """
 db.execute(cmd)
 
-
 # Create User table
 cmd = """\
 CREATE TABLE `User` (\
@@ -61,9 +60,9 @@ CREATE TABLE `User` (\
   `age` INT NULL DEFAULT NULL,\
   `weight` INT NULL DEFAULT NULL,\
   `height` INT NULL DEFAULT NULL,\
-  `address` VARCHAR(200) NOT NULL,\
-  `city` VARCHAR(150) NOT NULL,\
-  `state` VARCHAR(3) NOT NULL,\
+  `address` VARCHAR(200) NOT NULL DEFAULT 'NULL',\
+  `city` VARCHAR(150) NOT NULL DEFAULT 'NULL',\
+  `state` VARCHAR(5) NOT NULL DEFAULT 'NULL',\
   PRIMARY KEY (`user_id`)
 );\
 """
@@ -77,9 +76,9 @@ CREATE TABLE `Trainer` (\
   `trainer_email` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
   `gym` VARCHAR(100) NULL DEFAULT NULL,\
   `certification` VARCHAR(150) NULL DEFAULT NULL,\
-  `address` VARCHAR(200) NOT NULL,\
-  `city` VARCHAR(150) NOT NULL,\
-  `state` VARCHAR(3) NOT NULL,\
+  `address` VARCHAR(200) NOT NULL DEFAULT 'NULL',\
+  `city` VARCHAR(150) NOT NULL DEFAULT 'NULL',\
+  `state` VARCHAR(5) NOT NULL DEFAULT 'NULL',\
   PRIMARY KEY (`trainer_id`)
 );\
 """
