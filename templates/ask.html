@@ -14,6 +14,7 @@
             <h1>Ask a question</h1>
             <p>Please ask your question using the form below:</p>
             <div class="form-horizontal" id="user-signup">
+                {% module xsrf_form_html() %}
                 <div class="control-group" id="age-group">
                     <div class="controls">
                         <textarea id="question" class="input-large" rows="5" type="text" placeholder="Type your question here"></textarea>
