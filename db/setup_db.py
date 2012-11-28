@@ -40,16 +40,17 @@ else:
 
 # Drop existing tables
 cmd = """\
-DROP TABLE IF EXISTS `RelatesTo`;\
-DROP TABLE IF EXISTS `SpecializesIn`;\
-DROP TABLE IF EXISTS `Interests`;\
-DROP TABLE IF EXISTS `FitnessTopics`;\
-DROP TABLE IF EXISTS `Answer`;\
-DROP TABLE IF EXISTS `Question`;\
-DROP TABLE IF EXISTS `Trainer`;\
-DROP TABLE IF EXISTS `User`;\
+    DROP TABLE IF EXISTS `RelatesTo`;\
+    DROP TABLE IF EXISTS `SpecializesIn`;\
+    DROP TABLE IF EXISTS `Interests`;\
+    DROP TABLE IF EXISTS `FitnessTopics`;\
+    DROP TABLE IF EXISTS `Answer`;\
+    DROP TABLE IF EXISTS `Question`;\
+    DROP TABLE IF EXISTS `Trainer`;\
+    DROP TABLE IF EXISTS `User`;\
 """
 db.execute(cmd)
+
 
 # Create User table
 cmd = """\
@@ -60,6 +61,9 @@ CREATE TABLE `User` (\
   `age` INT NULL DEFAULT NULL,\
   `weight` INT NULL DEFAULT NULL,\
   `height` INT NULL DEFAULT NULL,\
+  `address` VARCHAR(200) NOT NULL,\
+  `city` VARCHAR(150) NOT NULL,\
+  `state` VARCHAR(3) NOT NULL,\
   PRIMARY KEY (`user_id`)
 );\
 """
@@ -73,6 +77,9 @@ CREATE TABLE `Trainer` (\
   `trainer_email` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
   `gym` VARCHAR(100) NULL DEFAULT NULL,\
   `certification` VARCHAR(150) NULL DEFAULT NULL,\
+  `address` VARCHAR(200) NOT NULL,\
+  `city` VARCHAR(150) NOT NULL,\
+  `state` VARCHAR(3) NOT NULL,\
   PRIMARY KEY (`trainer_id`)
 );\
 """
@@ -111,7 +118,7 @@ db.execute(cmd)
 cmd = """\
 CREATE TABLE `FitnessTopics` (\
   `topic_id` INT NOT NULL AUTO_INCREMENT,\
-  `name` VARCHAR(50) NOT NULL,\
+  `name` VARCHAR(100) NOT NULL,\
   PRIMARY KEY (`topic_id`)\
 );\
 """
@@ -153,6 +160,23 @@ CREATE TABLE `RelatesTo` (\
   FOREIGN KEY (question_id) REFERENCES `Question` (`question_id`),\
   FOREIGN KEY (topic_id) REFERENCES `FitnessTopics` (`topic_id`)\
 );\
+"""
+db.execute(cmd)
+
+# Inserts topics into FitnessTopics
+cmd = """\
+INSERT INTO `FitnessTopics` (`name`)\
+  VALUES\
+  ("Aerobics"),\
+  ("Bodybuilding"),\
+  ("Cardio"),\
+  ("Diet and Nutrition"),\
+  ("Kickboxing"),\
+  ("Plyometrics"),\
+  ("Rehabilitation"),\
+  ("Weight Loss"),\
+  ("Yoga")\
+;\
 """
 db.execute(cmd)
 
