@@ -20,12 +20,50 @@ function signup(event) {
   var user_weight = $('#weight').val();
   var user_height_feet = $('#height-feet').val();
   var user_height_inches = $('#height-inches').val();
+  var interests = [];
+  var i =0;
+  if($("#aerobic").is(':checked')){
+    interests[i] = "Aerobics";
+    i+=1;
+  }
+  if($("#body").is(':checked')){
+    interests[i] = "BodyBuilding";
+    i+=1;
+  }
+  if($("#cardio").is(':checked')){
+    interests[i] = "Cardio";
+    i+=1;
+  }
+  if($("#diet").is(':checked')){
+    interests[i] = "Diet and Nutrition";
+   i+=1;
+  }
+  if($("#weight").is(':checked')){
+    interests[i] = "Weight Loss";
+       i+=1;
+  }
+  if($("#kick").is(':checked')){
+    interests[i] = "Kickboxing";
+       i+=1;
+  }
+  if($("#plyo").is(':checked')){
+    interests[i] = "Plyometrics";
+       i+=1;
+  }
+  if($("#rehab").is(':checked')){
+    interests[i] = "Rehabilitation";
+       i+=1;
+  }
+  if($("#yoga").is(':checked')){
+    interests[i] = "Yoga";
+  }
 
   var post_data = {
     "user": {
       "age": parseInt(user_age, 10),
       "weight": parseInt(user_weight, 10),
-      "height": 12 * parseInt(user_height_feet, 10) + parseInt(user_height_inches, 10)
+      "height": 12 * parseInt(user_height_feet, 10) + parseInt(user_height_inches, 10),
+      "interests": interests
     },
     "_xsrf": getCookie("_xsrf")
   };
