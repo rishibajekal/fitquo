@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+    {% include "nav_logged_in.html" %}
+{% end %}
+
+{% block content %}
+    <div id="question_id" class="hidden">{{ question_id }}</div>
+    <div class="container">
+        <div class="hero-unit">
+            <h1>Question</h1>
+            <p id="question"></p>
+            <h1>Answers</h1>
+            <p id="answers"></p>
+        </div>
+    </div>
+{% end %}
+
+{% block scripts %}
+    <script src="{{ static_url('js/answers.js') }}"></script>
+{% end %}

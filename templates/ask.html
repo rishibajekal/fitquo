@@ -1,11 +1,7 @@
 {% extends "base.html" %}
 
-{% block content %}
-    <ul class="nav pull-right">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-    </ul>
+{% block navbar %}
+        {% include "nav_logged_in.html" %}
 {% end %}
 
 {% block content %}

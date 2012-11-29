@@ -22,5 +22,25 @@ class QuestionHandler(BaseHandler):
         add_question = """INSERT INTO `Question` (`user_id`, `content`, `posted_at`) VALUES (%d, "%s","%s")"""\
             % (user_id, question_content, question_time)
         self.application.db.execute(add_question)
+        self.finish()
 
+
+class QuestionAnswerHandler(BaseHandler):
+
+    @asynchronous
+    def get(self, id):
+        get_question = """SELECT * FROM `Question` WHERE `question_id` = "%s" """\
+                        % (id)
+        get_answers = """SELECT * FROM `Answer` WHERE `question_id` = "%s" LIMIT 10"""\
+                        % (id)
+
+        question = self.application.db.get(get_question)
+        answers = self.application.db.query(get_answers)
+
+        list = []
+        list.append(question)
+        list.append(answers)
+
+        self.set_header("Content-Type", "application/json")
+        self.write(json.dumps(list))
         self.finish()

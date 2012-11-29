@@ -49,6 +49,7 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/trainer_signup', TrainerSignupPageHandler),
             tornado.web.URLSpec(r'/ask', QuestionPageHandler),
             tornado.web.URLSpec(r'/feed', FeedPageHandler),
+            tornado.web.URLSpec(r'/answers/([0-9]+)', AnswerPageHandler),
 
             # API Handlers
             tornado.web.URLSpec(r'/api/user_signup', UserSignupHandler),

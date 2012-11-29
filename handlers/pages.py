@@ -80,3 +80,10 @@ class FeedPageHandler(BaseHandler):
     @authenticated
     def get(self):
         self.render("feed.html")
+
+
+class AnswerPageHandler(BaseHandler):
+    """Handler to render about page"""
+    @authenticated
+    def get(self, id):
+        self.render("answers.html", question_id=id)
