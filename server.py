@@ -58,6 +58,7 @@ class Application(tornado.web.Application):
 
             tornado.web.URLSpec(r'/api/ask', QuestionHandler),
             tornado.web.URLSpec(r'/api/feed', FeedHandler),
+            tornado.web.URLSpec(r'/api/question/([0-9]+)', QuestionAnswerHandler),
 
             tornado.web.URLSpec(r'/login', GoogleLogin),
             tornado.web.URLSpec(r'/logout', LogoutHandler)
