@@ -30,7 +30,7 @@ function sendquestion(event) {
     dataType: 'json',
     data: JSON.stringify(new_question),
     success: function(data) {
-      window.location.replace("/");
+      window.location.replace("/feed");
     }
   });
 }
