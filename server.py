@@ -22,10 +22,12 @@ PASS = sys.argv[5]
 
 define("port", default=PORT, help="run on the given port", type=int)
 define("debug", default=False, help="run tornado in debug mode", type=bool)
+'''
 define("mysql_host", default="localhost:3306", help="host and port mysql is running on")
 define("mysql_database", default="fitquo", help="name of the mysql database")
 define("mysql_user", default="root", help="name of the mysql user")
 define("mysql_password", default="", help="password of the mysql user")
+'''
 
 
 class Application(tornado.web.Application):
@@ -35,8 +37,8 @@ class Application(tornado.web.Application):
         """Creates the application with specified settings"""
 
         self.db = tornado.database.Connection(
-            host=options.mysql_host, database=options.mysql_database,
-            user=options.mysql_user, password=options.mysql_password)
+            host=HOST, database=DB,
+            user=USER, password=PASS)
 
         handlers = [
 
