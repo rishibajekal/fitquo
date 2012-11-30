@@ -23,7 +23,7 @@ function signup(event) {
   var topics = ["#aerobics", "#bodybuilding", "#cardio", "#diet", "#weightloss", "#kick", "#plyo", "#rehab", "#yoga"];
   var topic_name = ["Aerobics", "Bodybuilding", "Cardio", "Diet and Nutrition", "Weight Loss", "Kickboxing", "Plyometrics", "Rehabilitation", "Yoga"];
   var interests = [];
-  var j =0;
+  var j = 0;
   for(var i=0; i < topics.length; i++)
   {
     if($(topics[i]).is(':checked'))

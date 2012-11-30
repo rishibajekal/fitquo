@@ -14,11 +14,24 @@ $(document).ready(function() {
 function sendquestion(event) {
   var content = $('#question').val();
   var timestamp = new Date().toISOString();
+  var topics = ["#aerobics", "#bodybuilding", "#cardio", "#diet", "#weightloss", "#kick", "#plyo", "#rehab", "#yoga"];
+  var topic_name = ["Aerobics", "Bodybuilding", "Cardio", "Diet and Nutrition", "Weight Loss", "Kickboxing", "Plyometrics", "Rehabilitation", "Yoga"];
+  var interests = [];
+  var j = 0;
+  for(var i=0; i < topics.length; i++)
+  {
+    if($(topics[i]).is(':checked'))
+    {
+      interests[j] = topic_name[i];
+      j+=1;
+    }
+  }
 
   var new_question = {
     "question": {
       "content": content,
-      "timestamp": timestamp
+      "timestamp": timestamp,
+      "interests": interests
     },
     "_xsrf": getCookie("_xsrf")
   };
@@ -36,7 +49,8 @@ function sendquestion(event) {
 }
 
 function is_valid_form() {
-  return $("#question").val().length !== 0 && $("#question").val().length < 250 && $("#question").val() !== " ";
+  var value = $("#question").val();
+  return value.length !== 0 && value.length < 1000 && value !== " ";
 }
 
 function getCookie(name) {

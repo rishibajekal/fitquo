@@ -22,10 +22,24 @@ class QuestionHandler(BaseHandler):
         add_question = """INSERT INTO `Question` (`user_id`, `content`, `posted_at`) VALUES (%d, "%s","%s")"""\
             % (user_id, question_content, question_time)
         self.application.db.execute(add_question)
+
+        get_id = """SELECT `question_id` FROM `Question` WHERE `posted_at` = "%s" """\
+            % (question_time)
+        result = self.application.db.get(get_id)
+        question_id = int(result["question_id"])
+
+        for topic_name in new_question["interests"]:
+            select_topic_id = """SELECT `topic_id` FROM `FitnessTopics` WHERE `name`="%s" """\
+                        % (topic_name)
+            topic_id = self.application.db.get(select_topic_id)
+            add_interests = """INSERT INTO `RelatesTo` (`question_id`, `topic_id`) VALUES (%d, %d)"""\
+                % (question_id, topic_id['topic_id'])
+            result = self.application.db.execute(add_interests)
+
         self.finish()
 
 
-class QuestionAnswerHandler(BaseHandler):
+class QAHandler(BaseHandler):
 
     @asynchronous
     def get(self, id):

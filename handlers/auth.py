@@ -33,8 +33,7 @@ class GoogleLogin(RequestHandler, GoogleMixin):
         # If user/trainer exists, go to the feed
         if len(user_result) != 0 or len(trainer_result) != 0:
             client = dict()
-            # self.redirect('/feed')
-            if(user_result) != 0:
+            if len(user_result) != 0:
                 client["type"] = "user"
                 self.set_secure_cookie("client_type", json.dumps(client))
             else:
@@ -51,4 +50,5 @@ class LogoutHandler(RequestHandler):
     @asynchronous
     def get(self):
         self.clear_cookie("fitquo")
+        self.clear_cookie("client_type")
         self.redirect('/')

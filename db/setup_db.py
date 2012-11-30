@@ -37,7 +37,8 @@ if sure in ('yes', 'Yes', 'y', 'Y'):
 else:
     print "Operation aborted."
     sys.exit(1)
-'''
+
+
 # Drop existing tables
 cmd = """\
     DROP TABLE IF EXISTS `RelatesTo`;\
@@ -50,7 +51,7 @@ cmd = """\
     DROP TABLE IF EXISTS `User`;\
 """
 db.execute(cmd)
-'''
+
 # Create User table
 cmd = """\
 CREATE TABLE `User` (\
@@ -90,7 +91,7 @@ CREATE TABLE `Question` (\
   `question_id` INT NOT NULL AUTO_INCREMENT,\
   `user_id` INT NOT NULL,\
   `posted_at` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
-  `content` VARCHAR(250) NOT NULL,\
+  `content` VARCHAR(1000) NOT NULL,\
   PRIMARY KEY (`question_id`),\
   FOREIGN KEY (user_id) REFERENCES `User` (`user_id`)\
 );\
@@ -104,7 +105,7 @@ CREATE TABLE `Answer` (\
   `question_id` INT NOT NULL,\
   `trainer_id` INT NOT NULL,\
   `posted_at` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
-  `content` VARCHAR(250) NOT NULL,\
+  `content` VARCHAR(1000) NOT NULL,\
   `rating` INT NULL DEFAULT NULL,\
   PRIMARY KEY (`answer_id`),\
   FOREIGN KEY (question_id) REFERENCES `Question` (`question_id`),\

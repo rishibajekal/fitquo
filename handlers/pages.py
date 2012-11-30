@@ -86,4 +86,5 @@ class AnswerPageHandler(BaseHandler):
     """Handler to render about page"""
     @authenticated
     def get(self, id):
-        self.render("answers.html", question_id=id)
+        client = json.loads(self.get_client_type())
+        self.render("answers.html", question_id=id, client_type=client["type"])

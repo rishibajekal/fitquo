@@ -11,7 +11,26 @@
             <p>Question:</p>
             <h2 id="question"></h2>
             <p>Answers:</p>
-            <h2 id="answers"></h2>
+            <div id="answers"></div>
+            {% if client_type == "trainer" %}
+                <div class="form-horizontal" id="answer-question">
+                    {% module xsrf_form_html() %}
+                    <div class="control-group" id="answer-group">
+                        <div class="controls">
+                            <textarea id="new_answer" class="input-large" rows="5" type="text" placeholder="Type your answer here"></textarea>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button id="answer-btn" class="btn btn-large btn-primary">Answer</button>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-error hidden" id="invalid-form">
+                        <strong>Warning!</strong> Please do not leave the question field blank or exceed 1000 characters.
+                    </div>
+                </div>
+            {% end %}
         </div>
     </div>
 {% end %}
