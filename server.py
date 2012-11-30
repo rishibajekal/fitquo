@@ -5,7 +5,7 @@ import tornado.database
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
-import redis
+#import redis
 from tornado.options import options, define
 from handlers.pages import *
 from handlers.auth import *
