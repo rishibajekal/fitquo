@@ -82,6 +82,14 @@ class FeedPageHandler(BaseHandler):
         self.render("feed.html")
 
 
+class SearchPageHandler(BaseHandler):
+    """Handler to render feed page"""
+
+    @authenticated
+    def get(self):
+        self.render("search.html")
+
+
 class AnswerPageHandler(BaseHandler):
     """Handler to render about page"""
     @authenticated

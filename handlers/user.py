@@ -40,7 +40,6 @@ class UserSignupHandler(BaseHandler):
         add_user_info = """INSERT INTO `User` (`user_name`, `user_email`, `age`, `weight`, `height`) VALUES ("%s", "%s", %d, %d, %d)"""\
                         % (user["name"], user["email"], user["age"], user["weight"], user["height"])
         result = self.application.db.execute(add_user_info)
-
         select_user_id = """SELECT `user_id` FROM `User` WHERE `user_email`="%s" """\
                     % (user["email"])
         result = self.application.db.get(select_user_id)
