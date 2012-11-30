@@ -43,7 +43,7 @@ class Application(tornado.web.Application):
         self.db = tornado.database.Connection(
             host=HOST, database=DB,
             user=USER, password=PASS)
-        self.r_server = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+        #self.r_server = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
         handlers = [
 
             # Page Handlers
