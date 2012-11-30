@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+        {% include "nav_logged_in.html" %}
+{% end %}
+
+{% block content %}
+    <div class="container">
+        <div class="hero-unit">
+            <h1>Search</h1>
+            <p>Search what you are looking for:</p>
+            <div class="form-horizontal" id="search-form">
+                {% module xsrf_form_html() %}
+                <div class="control-group" id="search-group">
+                    <div class="controls">
+                        <textarea id="search" class="input-large" rows="5" type="text" placeholder="Type your search query here"></textarea>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">Tag:</label>
+                    <div class="controls span2">
+                        <label class="checkbox">
+                            <input type="checkbox" value="option1" id="aerobics"> Aerobics</input>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="option2" id="bodybuilding"> Bodybuilding</input>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="option3" id="cardio"> Cardio</input>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="option3" id="diet"> Diet and Nutrition</input>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="option1" id="weightloss"> Weight Loss</input>
+                        </label>
+                    </div>
+                    <div class="controls span2">
+                        <label class="checkbox">
+                            <input type="checkbox" value="option2" id="kick"> Kickboxing</input>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="option3" id="plyo"> Plyometrics</input>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="option3" id="rehab"> Rehabilitation</input>
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" value="option2" id="yoga"> Yoga</input>
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">Advanced Search:</label>
+                    <div class="controls span2">
+                        <label class="checkbox">
+                            <input type="checkbox" value="option-adv" id="advanced"> Advanced</input>
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button id="search-button" class="btn btn-large btn-primary">Go</button>
+                    </div>
+                </div>
+
+                <div class="alert alert-error hidden" id="invalid-form">
+                    <strong>Warning!</strong> Please do not leave the search field blank or exceed 1000 characters.
+                </div>
+
+                <div id="search-results">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+{% end %}
+
+{% block scripts %}
+    <script src="{{ static_url('js/search.js') }}"></script>
+{% end %}

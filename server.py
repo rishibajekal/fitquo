@@ -5,6 +5,7 @@ import tornado.database
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
+import redis
 from tornado.options import options, define
 from handlers.pages import *
 from handlers.auth import *
@@ -13,13 +14,16 @@ from handlers.trainer import *
 from handlers.question import *
 from handlers.feed import *
 from handlers.answer import *
+from handlers.search import *
 
 PORT = sys.argv[1]
 HOST = sys.argv[2]
 DB = sys.argv[3]
 USER = sys.argv[4]
 PASS = sys.argv[5]
-
+REDIS_HOST = "localhost"
+REDIS_PORT = 6379
+REDIS_DB = 0
 define("port", default=PORT, help="run on the given port", type=int)
 define("debug", default=False, help="run tornado in debug mode", type=bool)
 '''
@@ -39,7 +43,7 @@ class Application(tornado.web.Application):
         self.db = tornado.database.Connection(
             host=HOST, database=DB,
             user=USER, password=PASS)
-
+        self.r_server = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
         handlers = [
 
             # Page Handlers
@@ -53,7 +57,7 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/ask', QuestionPageHandler),
             tornado.web.URLSpec(r'/feed', FeedPageHandler),
             tornado.web.URLSpec(r'/answers/([0-9]+)', AnswerPageHandler),
-
+            tornado.web.URLSpec(r'/search', SearchPageHandler),
             # API Handlers
             tornado.web.URLSpec(r'/api/user_signup', UserSignupHandler),
             tornado.web.URLSpec(r'/api/trainer_signup', TrainerSignupHandler),
@@ -64,6 +68,7 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/api/feed', FeedHandler),
             tornado.web.URLSpec(r'/api/question/([0-9]+)', QAHandler),
             tornado.web.URLSpec(r'/api/answer', AnswerHandler),
+            tornado.web.URLSpec(r'/api/search', SearchHandler),
 
             tornado.web.URLSpec(r'/login', GoogleLogin),
             tornado.web.URLSpec(r'/logout', LogoutHandler)
