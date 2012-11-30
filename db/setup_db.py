@@ -37,7 +37,7 @@ if sure in ('yes', 'Yes', 'y', 'Y'):
 else:
     print "Operation aborted."
     sys.exit(1)
-
+'''
 # Drop existing tables
 cmd = """\
     DROP TABLE IF EXISTS `RelatesTo`;\
@@ -50,7 +50,7 @@ cmd = """\
     DROP TABLE IF EXISTS `User`;\
 """
 db.execute(cmd)
-
+'''
 # Create User table
 cmd = """\
 CREATE TABLE `User` (\
@@ -75,7 +75,7 @@ CREATE TABLE `Trainer` (\
   `trainer_name` VARCHAR(100) NOT NULL DEFAULT 'NULL',\
   `trainer_email` VARCHAR(50) NOT NULL DEFAULT 'NULL',\
   `gym` VARCHAR(100) NULL DEFAULT NULL,\
-  `certification` VARCHAR(150) NULL DEFAULT NULL,\
+  `certification` VARCHAR(150) NULL DEFAULT 'NULL',\
   `address` VARCHAR(200) NOT NULL DEFAULT 'NULL',\
   `city` VARCHAR(150) NOT NULL DEFAULT 'NULL',\
   `state` VARCHAR(5) NOT NULL DEFAULT 'NULL',\

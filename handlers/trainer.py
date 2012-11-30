@@ -42,4 +42,17 @@ class TrainerSignupHandler(BaseHandler):
                         % (trainer["name"], trainer["email"], trainer["gym"], trainer["certification"])
         result = self.application.db.execute(add_trainer_info)
 
+        select_trainer_id = """SELECT `trainer_id` FROM `Trainer` WHERE `trainer_email`="%s" """\
+                    % (trainer["email"])
+        result = self.application.db.get(select_trainer_id)
+        trainer_id = int(result["trainer_id"])
+
+        for topic_name in trainer["specialties"]:
+            select_topic_id = """SELECT `topic_id` FROM `FitnessTopics` WHERE `name`="%s" """\
+                        % (topic_name)
+            topic_id = self.application.db.get(select_topic_id)
+            add_specialties = """INSERT INTO `SpecializesIn` (`trainer_id`, `topic_id`) VALUES (%d, %d)"""\
+                % (trainer_id, topic_id['topic_id'])
+            result = self.application.db.execute(add_specialties)
+
         return True if result is not None else False

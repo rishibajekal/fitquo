@@ -16,10 +16,24 @@ function signup(event) {
   var gym = $('#gym').val();
   var cert = $('#cert').val();
 
+  var topics = ["#aerobics", "#bodybuilding", "#cardio", "#diet", "#weightloss", "#kick", "#plyo", "#rehab", "#yoga"];
+  var topic_name = ["Aerobics", "Bodybuilding", "Cardio", "Diet and Nutrition", "Weight Loss", "Kickboxing", "Plyometrics", "Rehabilitation", "Yoga"];
+  var specialties = [];
+  var j =0;
+  for(var i=0; i < topics.length; i++)
+  {
+    if($(topics[i]).is(':checked'))
+    {
+      specialties[j] = topic_name[i];
+      j+=1;
+    }
+  }
+
   var post_data = {
     "trainer": {
       "gym": gym,
-      "certification": cert
+      "certification": cert,
+      "specialties": specialties
     },
     "_xsrf": getCookie("_xsrf")
   };
