@@ -44,7 +44,10 @@ class Application(tornado.web.Application):
         self.db = tornado.database.Connection(
             host=HOST, database=DB,
             user=USER, password=PASS)
-        self.r_server = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+        redis_url = os.getenv('REDISTOGO_URL', "redis://redistogo:e91cf3f6188f66bfbc18bee9a1173daf@tench.redistogo.com/9243")
+        self.r_server = redis.from_url(redis_url)
+
+        #self.r_server = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
         handlers = [
 
             # Page Handlers
