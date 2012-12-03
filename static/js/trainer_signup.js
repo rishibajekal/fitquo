@@ -58,10 +58,13 @@ function signup(event) {
 function is_valid_form() {
   var gym = "gym";
   var cert = "cert";
+  var ACCESS = "access";
   var is_valid = !($("#"+gym+"-group").hasClass("error") ||
-                   $("#"+cert+"-group").hasClass("error")) &&
+                   $("#"+cert+"-group").hasClass("error") ||
+                   $("#"+ACCESS+"-group").hasClass("error")) &&
                    $("#"+gym).val().length !== 0 &&
-                   $("#"+cert).val().length !== 0;
+                   $("#"+cert).val().length !== 0 &&
+                   $("#"+ACCESS).val() === "deadbeef";
   return is_valid;
 }
 
