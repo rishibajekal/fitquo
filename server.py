@@ -22,7 +22,7 @@ HOST = sys.argv[2]
 DB = sys.argv[3]
 USER = sys.argv[4]
 PASS = sys.argv[5]
-REDIS_HOST = "redis://redistogo:e91cf3f6188f66bfbc18bee9a1173daf@tench.redistogo.com:9243"
+REDIS_HOST = "redis://redistogo:e91cf3f6188f66bfbc18bee9a1173daf@tench.redistogo.com/"
 REDIS_PORT = 9243
 REDIS_DB = 0
 define("port", default=PORT, help="run on the given port", type=int)
