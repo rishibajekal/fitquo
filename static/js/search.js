@@ -2,7 +2,10 @@ $(document).ready(function() {
   $('#search-button').click(function(event) {
     if (is_valid_form()) {
       $('#invalid-form').addClass('hidden');
+      $("#search-results").empty();
       sendsearch(event);
+      var position = $("#search-results").position();
+      scroll(0, position.top);
     }
     else {
       $('#invalid-form').removeClass('hidden');
@@ -54,7 +57,7 @@ function sendsearch(event) {
         var result = data[i];
         $("#search-results").prepend("<p><h4><a href='answers/" +
                 result["id"] + "'><large class='lead' id ='name'>" +
-                result["content"] + "</large></a></h4>");
+                result["content"] + "</large></a></h4><hr>");
       }
       $("#search-results").prepend("<p><h2>Search Results:</h2></p>");
     }

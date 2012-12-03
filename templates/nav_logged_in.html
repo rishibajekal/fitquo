@@ -2,8 +2,11 @@
     <li><a href="/feed">Feed</a></li>
     <li><a href="/about">About</a></li>
     <li><a href="/contact">Contact</a></li>
-    <a href="/ask" class="btn btn-primary">Ask Question</a>
     <a href="/search" class="btn btn-primary">Search</a>
+    {% if client_type == "user" %}
+        <a href="/ask" class="btn btn-primary">Ask Question</a>
+        <a href="/recommend" class="btn btn-primary">Recommended Trainers</a>
+    {% end %}
 
 </ul>
 <ul class="nav pull-right">

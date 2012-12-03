@@ -21,3 +21,12 @@ class BaseHandler(RequestHandler):
             raise tornado.web.HTTPError(403, "'_xsrf' argument missing from POST")
         if self.xsrf_token != token:
             raise tornado.web.HTTPError(403, "XSRF cookie does not match POST argument")
+
+    def renderPage(self, file, **kwargs):
+        cookie = self.get_client_type()
+        client = dict()
+        if cookie is not None:
+            client = json.loads(cookie)
+        else:
+            client["type"] = None
+        super(BaseHandler, self).render(file, client_type=client["type"], **kwargs)

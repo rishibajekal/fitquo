@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+    {% include "nav_logged_in.html" %}
+{% end %}
+
+{% block content %}
+    <div class="container">
+        <div class="hero-unit">
+            <h1>Recommended for You</h1>
+            <br />
+            <div id="trainers"></div>
+        </div>
+    </div>
+{% end %}
+
+{% block scripts %}
+    <script src="{{ static_url('js/recommend.js') }}"></script>
+{% end %}
