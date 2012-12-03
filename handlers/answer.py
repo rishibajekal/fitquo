@@ -25,3 +25,14 @@ class AnswerHandler(BaseHandler):
             % (trainer_id, answer_content, answer_time, related_question)
         self.application.db.execute(add_answer)
         self.finish()
+
+
+class DeleteAnswerHandler(BaseHandler):
+
+    @asynchronous
+    def post(self):
+        body = json.loads(self.request.body)
+        answer_id = body["id"]
+        delete_answer = "DELETE FROM Answer WHERE answer_id=%s"
+        self.application.db.execute(delete_answer, (answer_id))
+        self.finish()

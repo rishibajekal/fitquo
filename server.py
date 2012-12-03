@@ -73,6 +73,7 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/api/answer', AnswerHandler),
             tornado.web.URLSpec(r'/api/search', SearchHandler),
             tornado.web.URLSpec(r'/api/recommend', RecommendHandler),
+            tornado.web.URLSpec(r'/api/delete_answer', DeleteAnswerHandler),
 
             tornado.web.URLSpec(r'/login', GoogleLogin),
             tornado.web.URLSpec(r'/logout', LogoutHandler)

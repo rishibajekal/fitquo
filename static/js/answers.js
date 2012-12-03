@@ -1,13 +1,37 @@
 $(document).ready(function() {
     var question_id = $("#question_id").html();
+    var client_type = $("#client_type").html();
+
     $.getJSON('/api/question/' + question_id, function(data) {
       $('#question').append(data[0]["content"]);
       if (data[1].length > 0) {
         for (var i = 0; i < data[1].length; i++) {
-          console.log(data[1][i]);
-          $('#answers').append("<h3 id='answer" + (i+1) + "'>" + data[1][i]["content"] + "</h3>");
+          var html = "<h3 id='answer" + (i + 1) + "'>" + data[1][i]["content"];
+          if (client_type === "trainer") {
+            html += "<span class='pull-right close delete' id='" + data[1][i]["answer_id"] + "'>DELETE</span></h3>";
+          }
+          html += "<hr>";
+          $('#answers').append(html);
         }
       }
+    });
+
+    $('.delete').live('click', function(event) {
+      var id = $(this).attr('id');
+      var data = {
+        "id": id,
+        "_xsrf": getCookie("_xsrf")
+      };
+      $.ajax({
+        url: '/api/delete_answer',
+        type: 'POST',
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(data),
+        success: function(data) {
+          window.location.reload();
+        }
+      });
     });
 
     $('#answer-btn').click(function(event) {

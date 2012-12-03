@@ -13,6 +13,7 @@
             <p>Answers:</p>
             <div id="answers"></div>
             {% if client_type == "trainer" %}
+                <div id="client_type" class="hidden">{{ client_type }}</div>
                 <div class="form-horizontal" id="answer-question">
                     {% module xsrf_form_html() %}
                     <div class="control-group" id="answer-group">
