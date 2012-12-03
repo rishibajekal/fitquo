@@ -33,12 +33,9 @@ class QuestionHandler(BaseHandler):
 
         question_mod = question_content.translate(None, string.punctuation)
         question_array = question_mod.split()
-        #for word in question_array:
-            #self.application.r_server.sadd(word, question_id)
-            #print "======================="
-            #print word
-            #print self.application.r_server.smembers(word)
-            #print "======================="
+        for word in question_array:
+            word = word.lower()
+            self.application.r_server.sadd(word, question_id)
 
         for topic_name in new_question["interests"]:
             select_topic_id = """SELECT `topic_id` FROM `FitnessTopics` WHERE `name`="%s" """\

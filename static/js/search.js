@@ -55,7 +55,7 @@ function sendsearch(event) {
       for(var i=0; i < data.length; i++)
       {
         var result = data[i];
-        $("#search-results").prepend("<p><h4><a href='answers/" +
+        $("#search-results").append("<p><h4><a href='answers/" +
                 result["id"] + "'><large class='lead' id ='name'>" +
                 result["content"] + "</large></a></h4><hr>");
       }

@@ -5,7 +5,7 @@ import tornado.database
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
-#import redis
+import redis
 from tornado.options import options, define
 from handlers.pages import *
 from handlers.auth import *
@@ -22,8 +22,8 @@ HOST = sys.argv[2]
 DB = sys.argv[3]
 USER = sys.argv[4]
 PASS = sys.argv[5]
-REDIS_HOST = "localhost"
-REDIS_PORT = 6379
+REDIS_HOST = "redis://redistogo:e91cf3f6188f66bfbc18bee9a1173daf@tench.redistogo.com:9243"
+REDIS_PORT = 9243
 REDIS_DB = 0
 define("port", default=PORT, help="run on the given port", type=int)
 define("debug", default=False, help="run tornado in debug mode", type=bool)
@@ -44,7 +44,7 @@ class Application(tornado.web.Application):
         self.db = tornado.database.Connection(
             host=HOST, database=DB,
             user=USER, password=PASS)
-        #self.r_server = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+        self.r_server = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
         handlers = [
 
             # Page Handlers
