@@ -22,8 +22,8 @@ HOST = sys.argv[2]
 DB = sys.argv[3]
 USER = sys.argv[4]
 PASS = sys.argv[5]
-REDIS_HOST = "redis://redistogo:e91cf3f6188f66bfbc18bee9a1173daf@tench.redistogo.com/"
-REDIS_PORT = 9243
+REDIS_HOST = sys.argv[6]
+REDIS_PORT = 6379
 REDIS_DB = 0
 define("port", default=PORT, help="run on the given port", type=int)
 define("debug", default=False, help="run tornado in debug mode", type=bool)
@@ -44,10 +44,12 @@ class Application(tornado.web.Application):
         self.db = tornado.database.Connection(
             host=HOST, database=DB,
             user=USER, password=PASS)
-        redis_url = os.getenv('REDISTOGO_URL', "redis://redistogo:e91cf3f6188f66bfbc18bee9a1173daf@tench.redistogo.com/9243")
-        self.r_server = redis.from_url(redis_url)
 
-        #self.r_server = redis.StrictRedis(host=REDIS_HOST, port=REDIS_PORT, db=REDIS_DB)
+        if REDIS_HOST == "local":
+            self.r_server = redis.StrictRedis(host="localhost", port=REDIS_PORT, db=REDIS_DB)
+        else:
+            self.r_server = redis.from_url(REDIS_HOST)
+
         handlers = [
 
             # Page Handlers

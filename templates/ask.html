@@ -7,18 +7,16 @@
 {% block content %}
     <div class="container">
         <div class="hero-unit">
-            <h1>Ask a question</h1>
-            <p>Please ask your question using the form below:</p>
             <div class="form-horizontal" id="user-signup">
                 {% module xsrf_form_html() %}
-                <div class="control-group" id="question-group">
-                    <div class="controls">
-                        <textarea id="question" class="input-large" rows="5" type="text" placeholder="Type your question here"></textarea>
+                <div class="control-group center" id="question-group">
+                    <div class="controls center">
+                        <h1>Ask a question</h1>
+                        <p>Please ask your question using the form below:</p>
+                        <textarea id="question" class="input-large span6" rows="4" type="text" placeholder="Type your question here"></textarea>
                     </div>
                 </div>
-
-                <div class="control-group">
-                    <label class="control-label">Tag:</label>
+                <div class="control-group center">
                     <div class="controls span2">
                         <label class="checkbox">
                             <input type="checkbox" value="option1" id="aerobics"> Aerobics</input>

@@ -19,7 +19,7 @@ function sendsearch(event) {
   var topics = ["#aerobics", "#bodybuilding", "#cardio", "#diet", "#weightloss", "#kick", "#plyo", "#rehab", "#yoga"];
   var topic_name = ["Aerobics", "Bodybuilding", "Cardio", "Diet and Nutrition", "Weight Loss", "Kickboxing", "Plyometrics", "Rehabilitation", "Yoga"];
   var interests = [];
-  var advanced = "no";
+  var advanced = "yes";
   var j = 0;
   for(var i=0; i < topics.length; i++)
   {
@@ -30,9 +30,9 @@ function sendsearch(event) {
     }
   }
 
-  if($("#advanced").is(':checked'))
+  if($("#basic").is(':checked'))
   {
-    advanced = "yes";
+    advanced = "no";
   }
 
   var new_search = {
