@@ -7,5 +7,3 @@ simplejson==2.6.2
 tornado==2.4
 torndb==0.1
 wsgiref==0.1.2
-newrelic
-
