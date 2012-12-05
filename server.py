@@ -16,6 +16,7 @@ from handlers.feed import *
 from handlers.answer import *
 from handlers.search import *
 from handlers.recommend import *
+import modules.nlp as nlp
 
 PORT = sys.argv[1]
 HOST = sys.argv[2]
@@ -40,6 +41,8 @@ class Application(tornado.web.Application):
 
     def __init__(self):
         """Creates the application with specified settings"""
+
+        self.classifier = nlp.get_classifier()
 
         self.db = tornado.database.Connection(
             host=HOST, database=DB,
@@ -89,6 +92,7 @@ class Application(tornado.web.Application):
         settings = dict(
             template_path=os.path.join(current_dir, 'templates'),
             static_path=os.path.join(current_dir, 'static'),
+            module_path=os.path.join(current_dir, 'modules'),
             login_url='/login',
             debug=options.debug,
             autoescape='xhtml_escape',

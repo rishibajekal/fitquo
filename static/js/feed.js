@@ -7,7 +7,7 @@ $(document).ready(function() {
                 question["content"] + "</large></a></h4>"+
                 "<large class='pull-right'><span class='muted'>posted </span><time class='timeago' datetime=" +
                 question['posted_at' ] + "></time><span class='muted'> by </span><a href='#'>" +
-                question["author"] + "</a></large></div><hr>");
+                question["author"] + "</a></large></div><br><hr>");
             $("time.timeago").timeago();
         });
     });

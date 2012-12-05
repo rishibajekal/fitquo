@@ -20,6 +20,13 @@ class QuestionHandler(BaseHandler):
         new_question = body["question"]
         question_content = new_question['content']
         question_time = new_question['timestamp']
+
+        # Classify each question as spam
+        classification = self.application.classifier.classify(new_question)
+        # If spam, store in Redis to manually prune later
+        if classification == "neg":
+            self.application.r_server.sadd(classification, question_content)
+
         add_question = """INSERT INTO `Question` (`user_id`, `content`, `posted_at`) VALUES (%d, "%s","%s")"""\
             % (user_id, question_content, question_time)
         self.application.db.execute(add_question)
@@ -29,7 +36,7 @@ class QuestionHandler(BaseHandler):
         result = self.application.db.get(get_id)
         question_id = int(result["question_id"])
 
-        #redis tokenizing the string
+        # Redis tokenizing the string
 
         question_mod = question_content.translate(None, string.punctuation)
         question_array = question_mod.split()

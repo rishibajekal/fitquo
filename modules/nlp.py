@@ -7,8 +7,16 @@ from nltk.corpus import stopwords
 RES_DIR = "static/resources"
 WORD = re.compile(r'\w+')
 STOP_WORDS = set(
-            "grid6 gutenberg project alice"
+            "grid6 gutenberg project alice leaves"
             .split())
+
+
+def get_classifier():
+    positive = generate_data_points("fitness.txt", "pos", 5)
+    negative = generate_data_points("alice.txt", "neg", 5)
+    train_features = negative + positive
+    classifier = nltk.NaiveBayesClassifier.train(train_features)
+    return classifier
 
 
 def generate_data_points(file_name, value, jump):
@@ -16,9 +24,8 @@ def generate_data_points(file_name, value, jump):
     freq = get_word_features(file_name)
     for i in range(0, len(freq) / jump, jump):
         next_set = dict(sorted(freq.iteritems(), key=lambda item: -item[1])[i:i + jump])
-        print next_set
         data.append((next_set, value))
-    next_set = dict(sorted(freq.iteritems(), key=lambda item: -item[1])[i:])
+    next_set = dict(sorted(freq.iteritems(), key=lambda item: -item[1])[i * jump:])
     data.append((next_set, value))
     return data
 
@@ -40,7 +47,7 @@ def is_useful_word(word):
             word[1:] not in stopwords.words("english"))
 
 
-if __name__ == "__main__":
+def test():
     positive = generate_data_points("fitness.txt", "pos", 5)
     negative = generate_data_points("alice.txt", "neg", 5)
 
@@ -54,3 +61,7 @@ if __name__ == "__main__":
     classifier = nltk.NaiveBayesClassifier.train(train_features)
     print "Accuracy: ", nltk.classify.util.accuracy(classifier, test_features)
     classifier.show_most_informative_features()
+
+
+if __name__ == "__main__":
+    test()
