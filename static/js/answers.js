@@ -4,10 +4,10 @@ $(document).ready(function() {
 
     $.getJSON('/api/question/' + question_id, function(data) {
       var question = data[0];
-      var quest_html = "<div class='question'><h4><large class='lead' id='name'>" + question["content"] + "</large></h4>"+
+      var quest_html = "<div class='question'><h4><large class='lead' id='name'>" + question["content"] + "</large></h4>" +
                 "<h4 class='pull-right'><span class='muted'>posted </span><time class='timeago' datetime=" +
-                question['posted_at'] + "></time><span class='muted'> by </span><a href='#'>" +
-                question["user_name"] + "</a></h4></div><br>";
+                question['posted_at'] + "></time><span class='muted'> by </span><a href='/profile/" + question["user_id"] +
+                "'>" + question["user_name"] + "</a></h4></div><br>";
       $('#question').append(quest_html);
       if (data[1].length > 0) {
         for (var i = 0; i < data[1].length; i++) {
