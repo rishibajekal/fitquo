@@ -24,7 +24,7 @@ class QuestionHandler(BaseHandler):
         question_time = new_question['timestamp']
 
         # Classify each question as spam
-        data = nlp.get_features(question_content)
+        data = nlp.generate_word_freq(question_content)
         classification = self.application.classifier.classify(data)
         # If spam, return failure to client-side to handle error
         if classification == "neg":
