@@ -26,8 +26,7 @@ class QuestionHandler(BaseHandler):
         # Classify each question as spam
         data = nlp.get_features(question_content)
         classification = self.application.classifier.classify(data)
-        print classification
-        # If spam, store in Redis to manually prune later
+        # If spam, return failure to client-side to handle error
         if classification == "neg":
             self.write({"success": "false"})
         else:
@@ -44,8 +43,9 @@ class QuestionHandler(BaseHandler):
             question_mod = question_content.translate(None, string.punctuation)
             question_array = question_mod.split()
             for word in question_array:
-                word = word.lower()
-                self.application.r_server.sadd(word, question_id)
+                if nlp.is_useful_word(word):
+                    word = word.lower()
+                    self.application.r_server.sadd(word, question_id)
 
             for topic_name in new_question["interests"]:
                 select_topic_id = """SELECT `topic_id` FROM `FitnessTopics` WHERE `name`="%s" """\

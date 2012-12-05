@@ -1,8 +1,8 @@
 from tornado.web import asynchronous
 from handlers.base import BaseHandler
 import simplejson as json
-import pq
 import string
+import modules.pq as pq
 
 
 class SearchHandler(BaseHandler):
