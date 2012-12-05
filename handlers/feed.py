@@ -15,6 +15,6 @@ class FeedHandler(BaseHandler):
             get_user = "SELECT user_name FROM User WHERE user_id = %s"
             user = self.application.db.get(get_user, (user_id))
             user_name = user['user_name']
-            result["author"] = user_name
+            result["user_name"] = user_name
         self.write(json.dumps(results))
         self.finish()

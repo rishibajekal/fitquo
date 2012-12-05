@@ -63,7 +63,7 @@ class QAHandler(BaseHandler):
 
     @asynchronous
     def get(self, id):
-        get_question = """SELECT * FROM `Question` WHERE `question_id` = "%s" """\
+        get_question = """SELECT `content`, `posted_at`, `user_id` FROM `Question` WHERE `question_id` = "%s" """\
                         % (id)
         get_answers = """SELECT * FROM `Answer` WHERE `question_id` = "%s" LIMIT 10"""\
                         % (id)
@@ -71,10 +71,20 @@ class QAHandler(BaseHandler):
         question = self.application.db.get(get_question)
         answers = self.application.db.query(get_answers)
 
-        list = []
-        list.append(question)
-        list.append(answers)
+        get_user = """SELECT `user_name` FROM `User` WHERE `user_id` = "%s" """\
+                        % (question["user_id"])
+        user = self.application.db.get(get_user)
+
+        result = []
+        q = dict()
+        q["content"] = question["content"]
+        q["posted_at"] = question["posted_at"]
+        q["user_id"] = question["user_id"]
+        q["user_name"] = user["user_name"]
+
+        result.append(q)
+        result.append(answers)
 
         self.set_header("Content-Type", "application/json")
-        self.write(json.dumps(list))
+        self.write(json.dumps(result))
         self.finish()

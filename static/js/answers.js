@@ -3,7 +3,12 @@ $(document).ready(function() {
     var client_type = $("#client_type").html();
 
     $.getJSON('/api/question/' + question_id, function(data) {
-      $('#question').append(data[0]["content"]);
+      var question = data[0];
+      var quest_html = "<div class='question'><h4><large class='lead' id='name'>" + question["content"] + "</large></h4>"+
+                "<h4 class='pull-right'><span class='muted'>posted </span><time class='timeago' datetime=" +
+                question['posted_at'] + "></time><span class='muted'> by </span><a href='#'>" +
+                question["user_name"] + "</a></h4></div><br>";
+      $('#question').append(quest_html);
       if (data[1].length > 0) {
         for (var i = 0; i < data[1].length; i++) {
           var html = "<h3 id='answer" + (i + 1) + "'>" + data[1][i]["content"];
@@ -14,6 +19,7 @@ $(document).ready(function() {
           $('#answers').append(html);
         }
       }
+      $("time.timeago").timeago();
     });
 
     $('.delete').live('click', function(event) {
@@ -43,7 +49,6 @@ $(document).ready(function() {
         $('#invalid-form').removeClass('hidden');
       }
     });
-
 });
 
 function sendanswer(question_id) {
