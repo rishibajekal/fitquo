@@ -4,3 +4,4 @@ tornado==2.4
 torndb==0.1
 wsgiref==0.1.2
 redis==2.6
+newrelic
