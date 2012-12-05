@@ -60,6 +60,7 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/about', AboutPageHandler),
             tornado.web.URLSpec(r'/contact', ContactPageHandler),
             tornado.web.URLSpec(r'/profile', ProfilePageHandler),
+            tornado.web.URLSpec(r'/profile/([0-9]+)', ProfilePageHandler),
             tornado.web.URLSpec(r'/pre_signup', PreSignupPageHandler),
             tornado.web.URLSpec(r'/user_signup', UserSignupPageHandler),
             tornado.web.URLSpec(r'/trainer_signup', TrainerSignupPageHandler),
@@ -74,6 +75,7 @@ class Application(tornado.web.Application):
             tornado.web.URLSpec(r'/api/trainer_signup', TrainerSignupHandler),
             tornado.web.URLSpec(r'/api/user', UserInfoHandler),
             tornado.web.URLSpec(r'/api/trainer', TrainerInfoHandler),
+            tornado.web.URLSpec(r'/api/user/([0-9]+)', UserInfoHandler),
 
             tornado.web.URLSpec(r'/api/ask', QuestionHandler),
             tornado.web.URLSpec(r'/api/feed', FeedHandler),

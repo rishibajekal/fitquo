@@ -24,12 +24,16 @@ class ContactPageHandler(BaseHandler):
 class ProfilePageHandler(BaseHandler):
 
     @authenticated
-    def get(self):
-        client = json.loads(self.get_client_type())
-        if client['type'] == 'user':
-            self.renderPage("user_profile.html")
+    def get(self, id=None):
+
+        if(id == None):
+            client = json.loads(self.get_client_type())
+            if client['type'] == 'user':
+                self.renderPage("user_profile.html", user_id="")
+            else:
+                self.renderPage("trainer_profile.html")
         else:
-            self.renderPage("trainer_profile.html")
+            self.renderPage("user_profile.html", user_id=id)
 
 
 class PreSignupPageHandler(BaseHandler):
