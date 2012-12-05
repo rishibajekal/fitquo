@@ -12,18 +12,22 @@ STOP_WORDS = set(
 
 
 def get_classifier():
-    fitness = list(({word: count}, "pos") for word, count in get_features_from_file("fitness.txt").items())
-    alice = list(({word: count}, "neg") for word, count in get_features_from_file("alice.txt").items())
-    curse = list(({word: count}, "neg") for word, count in get_features_from_file("curse.txt").items())
+    fitness = create_data_points("fitness.txt", "pos")
+    alice = create_data_points("alice.txt", "neg")
+    curse = create_data_points("curse.txt", "neg")
 
     train_features = fitness + alice + curse
     classifier = nltk.NaiveBayesClassifier.train(train_features)
     return classifier
 
 
-def generate_data_points(file_name, value, jump):
+def create_data_points(file_name, value):
+    return list(({word: count}, value) for word, count in generate_word_freq_from_file(file_name).items())
+
+
+def get_features(file_name, value, jump):
     data = []
-    freq = get_features_from_file(file_name)
+    freq = generate_word_freq_from_file(file_name)
     for i in range(0, len(freq) / jump, jump):
         next_set = dict(sorted(freq.iteritems(), key=lambda item: -item[1])[i:i + jump])
         data.append((next_set, value))
@@ -32,7 +36,7 @@ def generate_data_points(file_name, value, jump):
     return data
 
 
-def get_features_from_file(file_name):
+def generate_word_freq_from_file(file_name):
     freq = dict()
     with open(os.path.join(RES_DIR, file_name), "rU") as f:
         for sentence in f.readlines():
@@ -42,7 +46,7 @@ def get_features_from_file(file_name):
     return freq
 
 
-def get_features(string):
+def generate_word_freq(string):
     freq = dict()
     for word in re.findall(WORD, string):
         freq[word] = True
@@ -59,8 +63,8 @@ def test():
     pos_sent = "weight-loss backache headache?"
     neg_sent = "blah this is useless rabbit?"
 
-    print "Classification for '" + pos_sent + "': ", classifier.classify(get_features(pos_sent))
-    print "Classification for '" + neg_sent + "': ", classifier.classify(get_features(neg_sent))
+    print "Classification for '" + pos_sent + "': ", classifier.classify(generate_word_freq(pos_sent))
+    print "Classification for '" + neg_sent + "': ", classifier.classify(generate_word_freq(neg_sent))
 
 
 if __name__ == "__main__":
