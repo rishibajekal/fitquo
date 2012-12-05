@@ -8,6 +8,7 @@ class UserInfoHandler(BaseHandler):
     @asynchronous
     def get(self, id=""):
         # Get user with email and write that JSON
+        topic_identifiers = []
         if (id == ""):
             curr_user = json.loads(self.get_current_user())
             get_user = """SELECT * FROM `User` WHERE `user_email` = "%s" """\
@@ -18,6 +19,16 @@ class UserInfoHandler(BaseHandler):
                 % (curr_id)
 
         user = self.application.db.get(get_user)
+        user_id = user['user_id']
+        get_topic_ids = "SELECT topic_id FROM Interests WHERE user_id = %s"
+        topic_identifiers = self.application.db.query(get_topic_ids, (user_id))
+        interests = []
+        for topic in topic_identifiers:
+            topic_id = topic['topic_id']
+            get_interest = "SELECT name FROM FitnessTopics WHERE topic_id = %s"
+            interest = self.application.db.get(get_interest, (topic_id))
+            interests.append(interest['name'])
+        user["interests"] = interests
         self.set_header("Content-Type", "application/json")
         self.write(json.dumps(user))
         self.finish()
