@@ -43,7 +43,12 @@ function sendquestion(event) {
     dataType: 'json',
     data: JSON.stringify(new_question),
     success: function(data) {
-      window.location.replace("/feed");
+      if (data.success == "true") {
+        window.location.replace("/feed");
+      }
+      else {
+        $('#dont-spam').removeClass('hidden');
+      }
     }
   });
 }

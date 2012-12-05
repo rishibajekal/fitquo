@@ -2,12 +2,14 @@ from tornado.web import asynchronous
 from handlers.base import BaseHandler
 import simplejson as json
 import string
+import modules.nlp as nlp
 
 
 class QuestionHandler(BaseHandler):
 
     @asynchronous
     def post(self):
+        self.set_header("Content-Type", "application/json")
         curr_user = json.loads(self.get_current_user())
 
         user_email = curr_user['email']
@@ -22,36 +24,38 @@ class QuestionHandler(BaseHandler):
         question_time = new_question['timestamp']
 
         # Classify each question as spam
-        classification = self.application.classifier.classify(new_question)
+        data = nlp.get_features(question_content)
+        classification = self.application.classifier.classify(data)
+        print classification
         # If spam, store in Redis to manually prune later
         if classification == "neg":
-            self.application.r_server.sadd(classification, question_content)
+            self.write({"success": "false"})
+        else:
+            add_question = """INSERT INTO `Question` (`user_id`, `content`, `posted_at`) VALUES (%d, "%s","%s")"""\
+                % (user_id, question_content, question_time)
+            self.application.db.execute(add_question)
 
-        add_question = """INSERT INTO `Question` (`user_id`, `content`, `posted_at`) VALUES (%d, "%s","%s")"""\
-            % (user_id, question_content, question_time)
-        self.application.db.execute(add_question)
+            get_id = """SELECT `question_id` FROM `Question` WHERE `posted_at` = "%s" """\
+                % (question_time)
+            result = self.application.db.get(get_id)
+            question_id = int(result["question_id"])
 
-        get_id = """SELECT `question_id` FROM `Question` WHERE `posted_at` = "%s" """\
-            % (question_time)
-        result = self.application.db.get(get_id)
-        question_id = int(result["question_id"])
+            # Redis tokenizing the string
+            question_mod = question_content.translate(None, string.punctuation)
+            question_array = question_mod.split()
+            for word in question_array:
+                word = word.lower()
+                self.application.r_server.sadd(word, question_id)
 
-        # Redis tokenizing the string
+            for topic_name in new_question["interests"]:
+                select_topic_id = """SELECT `topic_id` FROM `FitnessTopics` WHERE `name`="%s" """\
+                            % (topic_name)
+                topic_id = self.application.db.get(select_topic_id)
+                add_interests = """INSERT INTO `RelatesTo` (`question_id`, `topic_id`) VALUES (%d, %d)"""\
+                    % (question_id, topic_id['topic_id'])
+                result = self.application.db.execute(add_interests)
 
-        question_mod = question_content.translate(None, string.punctuation)
-        question_array = question_mod.split()
-        for word in question_array:
-            word = word.lower()
-            self.application.r_server.sadd(word, question_id)
-
-        for topic_name in new_question["interests"]:
-            select_topic_id = """SELECT `topic_id` FROM `FitnessTopics` WHERE `name`="%s" """\
-                        % (topic_name)
-            topic_id = self.application.db.get(select_topic_id)
-            add_interests = """INSERT INTO `RelatesTo` (`question_id`, `topic_id`) VALUES (%d, %d)"""\
-                % (question_id, topic_id['topic_id'])
-            result = self.application.db.execute(add_interests)
-
+            self.write({"success": "true"})
         self.finish()
 
 

@@ -8,9 +8,15 @@ headache
 backache
 stress
 mental
+eat
 balance
 energy
 old
+eat
+eat
+eat
+eat
+eat
 meditation
 relaxation
 relax
@@ -1234,6 +1240,7 @@ weight
 following
 eight
 healthy
+eat
 eating
 goals
 help
@@ -1287,6 +1294,7 @@ eating
 many
 calories
 attention
+eat
 hunger
 fullness
 cues
