@@ -13,7 +13,7 @@ $(document).ready(function(){
   }
   else{
   $.get('/api/user/'+user_id+'', function(data){
-      $('#email').append(data['user_email']);
+      $('#hide-me').hide();
       $('#name').append(data['user_name']);
       $('#age').append(data['age']);
       $('#weight').append(data['weight'] + " lbs");
